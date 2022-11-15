@@ -1,6 +1,6 @@
 
 # Maak een CRUD App met Python en Flask
-Een simpele CRUD (Create, Read, Update, Delete) Het vragen Hospitaal. In Python en de micro-framework Flask
+Een simpele CRUD (Create, Read, Update, Delete) Het Vragen-hospitaal. In Python en de micro-framework Flask
 
 Voorbeelden
 
