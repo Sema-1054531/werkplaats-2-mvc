@@ -24,7 +24,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 * Admin kan rollen aanmaken, verwijderen en updaten
 * Gebruiker (niet-admin) heeft toegang tot de dashboard alleen content niks anders
 * Admin heeft toegang tot alle mogelijkheden in de dashboard
-* Gebruik maken van berichten zoals error, warning, succes zodat de gebruiker eenvoudig kan navigeren door de app.
+* Gebruik maken van berichten zoals error, warning, succes zodat de gebruiker eenvoudig door de pagina van de app kan navigeren.
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
