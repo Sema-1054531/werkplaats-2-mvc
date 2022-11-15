@@ -12,7 +12,7 @@ etc..
 
 # App info
 
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en SCSS, het is gemakkelijk te gebruiken om HTML en CSS en ook JS als front-end library te gebruiken. En als database maken we gebruik van SQLite.
+De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en SCSS, het is gemakkelijk te gebruiken om HTML en CSS en ook JS als front-end library te gebruiken. Als database maken we gebruik van SQLite
 
 # Lijst van features
 
@@ -51,14 +51,13 @@ Om de demo applicatie te starten:
 python app.py
 ```
 
-# Hoe gebruik je deze repo
+# Gebruikte software
 
+# Hoe gebruik je deze repo
 
 # Instructies voor development
 
-
 # Setup en installeren
-
 
 # Starten van de app
 
