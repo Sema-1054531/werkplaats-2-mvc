@@ -21,7 +21,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 * Een profiel pagina waar je gegevens kan aanpassen
 * Rollen aanmaken zoals admin, redacteur, gebruiker
 * Admin kan updaten, toevoegen, en verwijderen
-* Admin kan een rollen toewijzen 
+* Admin kan rollen aanmaken, verwijderen en updaten
 * Gebruiker (niet-admin) heeft toegang tot de dashboard alleen content niks anders
 * Admin heeft toegang tot alle mogelijkheden in de dashboard
 * Gebruik maken van berichten zoals error, warning, succes zodat de gebruiker eenvoudig kan navigeren door de app.
