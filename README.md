@@ -16,14 +16,17 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 
 # Lijst van features
 
-* Gebruiker moet kunnen registeren
+* Gebruiker moet kunnen registeren - optioneel
 * Gebruiker moet kunnen inloggen
-* Een profiel pagina waar je gegevens kan aanpassen
-* Rollen aanmaken zoals admin, redacteur, gebruiker
+* Gebruiker heeft toegang tot de dashboard en kan alleen zijn eigen content inzien (geen-admin privileges)
+* Dashboard 
+Auteurs 
+Leerdoelen 
+Vragen 
+Een profiel pagina waar je gegevens kan aanpassen
 * Admin kan updaten, toevoegen, en verwijderen
 * Admin kan rollen aanmaken, verwijderen en updaten
-* Gebruiker (niet-admin) heeft toegang tot de dashboard alleen content niks anders
-* Admin heeft toegang tot alle mogelijkheden in de dashboard
+* Admin heeft toegang tot alle mogelijke functies vanuit de dashboard
 * Gebruik maken van berichten zoals error, warning, succes zodat de gebruiker eenvoudig door de pagina van de app kan navigeren.
 
 # werkplaats2_starter
