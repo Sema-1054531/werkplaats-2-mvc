@@ -4,26 +4,27 @@ Een simpele CRUD (Create, Read, Update, Delete) Het Vragen-hospitaal. In Python 
 
 Voorbeelden
 
-Pagina 1.
+Pagina 1
 
-Pagina 2.
+Pagina 2
 
 etc..
 
-# App info
+# Applicatie Informatie
 
 De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en SCSS, het is gemakkelijk te gebruiken om HTML en CSS en ook JS als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html)
 
 # Lijst van features
 
-* Gebruiker moet kunnen registeren - optioneel
+* Gebruiker moet kunnen registeren / Optioneel
 * Gebruiker moet kunnen inloggen
-* Gebruiker heeft toegang tot de dashboard en kan alleen zijn eigen content inzien (geen-admin privileges)
+* Gebruiker heeft toegang tot de dashboard en kan alleen zijn eigen content inzien 
 * Dashboard 
 Auteurs 
 Leerdoelen 
 Vragen 
-Een profiel pagina waar je gegevens kan aanpassen
+Een profiel pagina gegevens wijzigen 
+* De admin dashboard heeft wel de privileges en krijgt een admin link in de navbar) 
 * Admin kan updaten, toevoegen, en verwijderen
 * Admin kan rollen aanmaken, verwijderen en updaten
 * Admin heeft toegang tot alle mogelijke functies vanuit de dashboard
