@@ -18,7 +18,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 
 ~~Gebruiker moet kunnen registreren~~
 - [x] Gebruiker moet kunnen inloggen
-- [ ] Gebruiker heeft toegang tot de dashboard en kan alleen zijn eigen content inzien 
+- [x] Gebruiker heeft toegang tot de dashboard en kan alleen zijn eigen content inzien 
 - [ ] Dashboard
 - Auteurs 
 - Leerdoelen 
