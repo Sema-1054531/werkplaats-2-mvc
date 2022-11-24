@@ -21,12 +21,12 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waarin de overige problemen worden beschreven
 - [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst wijzigen en opslaan
-- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "<br>" en "&nbsp" filteren
+- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals <br> en &nbsp filteren
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
 - [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
-Gebruikers en hun wachtwoorden te kunnen instellen
+- Gebruikers en hun wachtwoorden te kunnen instellen
 - [ ] 
 
 # werkplaats2_starter
