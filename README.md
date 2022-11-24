@@ -19,14 +19,15 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 ~~Gebruiker moet kunnen registreren~~
 - [x] Gebruiker moet kunnen inloggen
 - [x] Dashboard overzicht menu 
-- [ ] Redacteuren willen na het lezen van de vraag een opzoeklijst het juiste item kunnen kiezen en de wijziging kunnen opslaan
+- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst die hij kan wijzigigen en kan opslaan
 - [ ] Er zijn vragen waarin HTML onzichtbare codes worden meegegeven "<br>" en "&nbsp". Redacteur wil dit kunnen wijzigen
-Profiel pagina alleen voor gebruikers met "beheer permissies" (should-have)
+
 - Gebruikers en hun wachtwoorden instellen
 - [ ] 
 - [ ] Admin kan rollen aanmaken, verwijderen en updaten
+- [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien
 
-- [ ] Gebruik maken van een terugknop bij de lijst?
+- [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
