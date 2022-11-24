@@ -17,7 +17,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 # Vereisten
 
 ~~Gebruiker moet kunnen registreren~~
-- [ ] De styling moet aansluiten bij de test-correct huisstijl
+- [x] De styling moet aansluiten bij de test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waarin de overige problemen worden beschreven
 - [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst wijzigen en opslaan
