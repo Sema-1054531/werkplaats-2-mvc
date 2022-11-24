@@ -14,7 +14,7 @@ etc..
 
 De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
 
-# Requirements
+# Vereisten
 
 ~~Gebruiker moet kunnen registreren~~
 - [ ] De styling moet aansluiten bij de test-correct huisstijl
