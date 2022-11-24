@@ -20,9 +20,9 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 - [ ] De styling moet aansluiten bij de test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waarin de overige problemen worden beschreven
-- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst die hij kan wijzigigen en kunnen opslaan
-- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "<br>" en "&nbsp" wijzigen of een andere voorstel
-- [ ] 
+- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst wijzigen en opslaan
+- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "<br>" en "&nbsp" filteren
+- [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
 - [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
