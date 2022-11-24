@@ -1,6 +1,6 @@
 
-# Maak een CRUD App met Python en Flask
-Een simpele CRUD (Create, Read, Update, Delete) Het Vragen-hospitaal. In Python en de micro-framework Flask
+# CRUD App in Python en Flask
+Een simpele CRUD (Create, Read, Update, Delete) In Python en de micro-framework Flask. TEST-CORRECT ( Het Vragen-hospitaal)
 
 Voorbeelden
 
@@ -10,24 +10,24 @@ Pagina 2
 
 etc..
 
-# Applicatie Informatie
+# Informatie
 
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en SCSS, het is gemakkelijk te gebruiken om HTML en CSS en ook JS als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html)
+De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
 
-# Lijst van features
+# Requirements
 
 ~~Gebruiker moet kunnen registreren~~
-- [x] Gebruiker moet kunnen inloggen
-- [x] Dashboard overzicht menu 
-- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst die hij kan wijzigigen en kan opslaan
-- [ ] Er zijn vragen waarin HTML onzichtbare codes worden meegegeven "<br>" en "&nbsp". Redacteur wil dit kunnen wijzigen
-
-- Gebruikers en hun wachtwoorden instellen
+- [ ] De styling moet aansluiten bij de test-correct huisstijl
+- [x] Geautoriseerde gebruikers moeten kunnen inloggen
+- [x] Dashboard overzicht menu waarin de overige problemen worden beschreven
+- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst die hij kan wijzigigen en kunnen opslaan
+- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "<br>" en "&nbsp" wijzigen of een andere voorstel
 - [ ] 
-- [ ] Admin kan rollen aanmaken, verwijderen en updaten
-- [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien
-
+- [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
+- [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
 - [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
+Gebruikers en hun wachtwoorden te kunnen instellen
+- [ ] 
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
