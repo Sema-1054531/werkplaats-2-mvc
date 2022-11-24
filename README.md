@@ -26,7 +26,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
 - [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
-- Gebruikers en hun wachtwoorden te kunnen instellen
+- Gebruikers en hun wachtwoorden kunnen instellen
 - [ ] 
 
 # werkplaats2_starter
