@@ -18,10 +18,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 
 ~~Gebruiker moet kunnen registreren~~
 - [x] Gebruiker moet kunnen inloggen
-- [x] Dashboard overzicht menu
-- Auteurs 
-- Leerdoelen 
-- Vragen 
+- [x] Dashboard overzicht menu 
 - [ ] Redacteuren willen na het lezen van de vraag een opzoeklijst het juiste item kunnen kiezen en de wijziging kunnen opslaan
 - [ ] Er zijn vragen waarin HTML onzichtbare codes worden meegegeven "<br>" en "&nbsp". Redacteur wil dit kunnen wijzigen
 Profiel pagina alleen voor gebruikers met "beheer permissies" (should-have)
