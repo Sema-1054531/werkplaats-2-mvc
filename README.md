@@ -25,8 +25,7 @@ De app is geschreven in Python en daarop de web-framework Flask. De front-end is
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
-- [ ] Profiel pagina alleen voor gebruikers met "beheer permissies" (<b>should-have</b>)
-Gebruikers en hun wachtwoorden kunnen instellen
+- [ ] Gebruikers met "beheer permissies" kan gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
