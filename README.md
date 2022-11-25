@@ -1,6 +1,8 @@
+# Informatie
 
-# CRUD App in Python en Flask
-Een simpele CRUD (Create, Read, Update, Delete) In Python en de micro-framework Flask. TEST-CORRECT ( Het Vragen-hospitaal)
+Een CRUD app maken voor TEST-CORRECT ( Het Vragen-hospitaal) 
+
+De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
 
 Voorbeelden
 
@@ -10,18 +12,14 @@ Pagina 2
 
 etc..
 
-# Informatie
-
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
-
 # Vereisten
 
 ~~Gebruiker moet kunnen registreren~~
 - [x] De styling moet aansluiten bij de test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waarin de overige problemen worden beschreven
-- [ ] Redacteur wil na het lezen van de vraag een opzoeklijkst wijzigen en opslaan
-- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" filteren
+- [ ] Redacteur wil na het lezen van de vraag een opzoeklijst en deze kunnen wijzigen
+- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "br" en "&nbsp" en deze wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
