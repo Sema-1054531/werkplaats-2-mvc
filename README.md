@@ -1,6 +1,6 @@
 # Informatie
 
-Een CRUD app maken voor TEST-CORRECT ( Het Vragen-hospitaal) 
+Een CRUD app maken voor TEST-CORRECT (Het Vragen-hospitaal) 
 
 De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
 
@@ -46,28 +46,23 @@ virtualenv venv
 pip install -r requirements.txt
 
 ```
-
 Om de demo applicatie te starten: 
 ``` 
 
 .\venv\sripts\activate
 
 python app.py
-
 ```
 
 # Gebruikte software
-Python
-Flask
-Bootstrap
-Html
-Css
-
-andere modules re, sqlite3, hashlib
+- Python
+- Flask
+- Bootstrap
+- Html
+- Css
 
 # Credits
 
 Nadir, Martijn, Romius, Thijs, Sema
 
 Overige links hieronder license, copyright etc.
-
