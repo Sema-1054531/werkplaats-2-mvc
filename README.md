@@ -21,9 +21,11 @@ etc..
 - [ ] Redacteur wil na het lezen van de vraag een opzoeklijst en deze kunnen wijzigen
 - [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "br" en "&nbsp" en deze wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
+- [ ] Als een vraag wordt getoond, zet de waarde van het ID op het scherm en maak daar een hyperlink van https://www.test-correct.nl/?vraag={{ id }}
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien 
 - [ ] En na het bijwerken van een vraag zou je ook hier terug naar deze lijst springen
 - [ ] Gebruikers met "beheer permissies" kan gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
+- [ ] 
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
