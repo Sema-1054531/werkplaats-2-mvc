@@ -18,7 +18,7 @@ etc..
 - [ ] De interface en styling moet aansluiten bij test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waar gebruikers een keuze voor één van de eerder beschreven problemen kunnen maken
-- [ ] Er zijn vragen die geen of een ongeldig leerdoel hebben
+- [ ] Redacteur wilt na het lezen van een vraag een opzoeklijst naar de juiste item kunnen kiezen, wijzigen en opslaan.
 - [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" en deze kunnen wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [ ] Als een vraag wordt getoond, zet de waarde van het ID op het scherm en maak daar een hyperlink van
