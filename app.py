@@ -47,6 +47,43 @@ def login():
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
 
+# home page only accessible for loggedin users
+@app.route('/home')
+def home():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row 
+    cursor = connection.cursor()
+    column=cursor.execute('''SELECT * FROM AUTEURS''')
+    rows = cursor.fetchall()
+    # alternative use of a list concept
+    column = [column[0] for column in column.description]
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+        return render_template('home.html', rows=rows, columns=column, username=session['username']) 
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+
+@app.route('/home/questions')
+def questions():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row 
+    cursor = connection.cursor()
+    column=cursor.execute('''SELECT * FROM VRAGEN''')
+    rows = cursor.fetchall()
+    column = [column[0] for column in column.description]
+    return render_template('home.html', rows=rows, columns=column)
+
+@app.route('/home/learn_objectives')
+def learn_objectives():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row 
+    cursor = connection.cursor()
+    column=cursor.execute('''SELECT * FROM LEERDOELEN''')
+    rows = cursor.fetchall()
+    column = [column[0] for column in column.description]
+    return render_template('home.html', rows=rows, columns=column)
+
 # profile page only accessible for loggedin users
 @app.route('/profile')
 def profile():
@@ -64,7 +101,15 @@ def profile():
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
-
+# logout page
+@app.route('/logout')
+def logout():
+   # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.debug = True
