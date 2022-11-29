@@ -1,8 +1,39 @@
 {% extends 'layout.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home - auteurs{% endblock %}
 
 {% block content %}
-<h2>Home Page</h2>
-<p>Welcome back, {{ username }}!</p>
+<h2>Dashboard</h2>
+<!-- <p>Welcome back, {{ username }}!</p> -->
+
+<body>
+
+    <div>
+        <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
+        <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
+        <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
+        <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
+    </div>
+
+    <table class='table table-bordered'>
+        <tr>
+            {% for column in columns %}
+            <th>{{ column }}</th>
+            {% endfor %}
+        </tr>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for field in row %}
+                <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>
 {% endblock %}
