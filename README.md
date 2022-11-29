@@ -17,7 +17,7 @@ etc..
 ~~Gebruiker moet kunnen registreren~~
 - [ ] De interface en styling moet aansluiten bij test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
-- [x] Dashboard overzicht menu waar gebruikers keuzes kunnen maken
+- [x] Dashboard overzicht menu waar de gebruiker de keuze kan maken voor de eerder benoemde problemen
 - [ ] Redacteur wilt na het lezen van een vraag een opzoeklijst naar de juiste item kunnen kiezen, wijzigen en opslaan
 - [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" en deze kunnen wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
