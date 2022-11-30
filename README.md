@@ -2,7 +2,7 @@
 
 Een CRUD app maken voor TEST-CORRECT (Het Vragen-hospitaal) 
 
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
+De app is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
 
 Voorbeelden
 
