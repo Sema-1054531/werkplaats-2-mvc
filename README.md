@@ -24,9 +24,10 @@ etc..
 - [ ] Als een vraag wordt getoond, zet de waarde van het ID op het scherm en maak daar een hyperlink van
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
 - [ ] gebruikers en hun wachtwoorden te kunnen instellen allen met "beheer permissies" (<b>should-have</b>)
-- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, er staan waardes in een kolom die leeg zou moeten zijn
+- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
 - [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
+- [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
 
 # werkplaats2_starter
