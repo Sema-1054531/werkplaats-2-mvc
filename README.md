@@ -27,7 +27,7 @@ etc..
 - [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
 - [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
-- [ ] gebruikers en hun wachtwoorden te kunnen instellen allen met "beheer permissies" (<b>should-have</b>)
+- [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
 
 
 # werkplaats2_starter
@@ -49,11 +49,9 @@ virtualenv venv
 .\venv\sripts\activate
 
 pip install -r requirements.txt
-
 ```
 Om de demo applicatie te starten: 
 ``` 
-
 .\venv\sripts\activate
 
 python app.py
