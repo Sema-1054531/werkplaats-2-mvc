@@ -1,5 +1,4 @@
 from flask import Flask, session, render_template, redirect, url_for, request
-import re
 import sqlite3 
 
 app = Flask(__name__)
