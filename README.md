@@ -2,7 +2,11 @@
 
 Een CRUD app maken voor TEST-CORRECT (Het Vragen-hospitaal) 
 
-De app is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
+Het belangrijkste product uit hun keuken is een digitaal toetsingsplatform, “test-correct”. Studenten maken hun toetsen online en docenten kunnen voortgang en groei analyserenmiddels verschillende rapportages. Daarnaast heeft het platform de unieke eigenschap omgezamenlijk, geanonimiseerd elkaars antwoorden te kunnen beoordelen. Inmiddels heeft het platform een enorme databank van honderdduizenden vragenopgebouwd. 
+
+In de strategie van het bedrijf gaat deze database een grote rol spelen en is hetvan belang dat de vragen van goede kwaliteit zijn. Om de redacteurs te helpen metverbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
+
+De applicatie is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
 
 Voorbeelden
 
@@ -13,6 +17,10 @@ Pagina 2
 etc..
 
 # Vereisten
+
+De gebruikers van dit platform zullen de redacteurs van de databank worden. We willen heneen platform bieden dat op basis van een aantal bekende patronen vraag items toont meteen probleem en de redacteur de mogelijkheid geeft deze te verbeteren of te exporteren.
+
+De applicatie zou normaliter direct op de database in prikken, maar die is heel groot. Test-correct heeft voor ons een demo dataset met vragen en een beperkt aantal kolommenvoorbereid (zonder antwoorden en metadata) die de nu bekende problemen illustreren.
 
 ~~Gebruiker moet kunnen registreren~~
 - [ ] De interface en styling moet aansluiten bij test-correct huisstijl
