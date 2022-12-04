@@ -2,11 +2,9 @@
 
 Een CRUD app maken voor TEST-CORRECT (Het Vragen-hospitaal) 
 
-Het belangrijkste product uit hun keuken is een digitaal toetsingsplatform, “test-correct”. Studenten maken hun toetsen online en docenten kunnen voortgang en groei analyserenmiddels verschillende rapportages. Daarnaast heeft het platform de unieke eigenschap omgezamenlijk, geanonimiseerd elkaars antwoorden te kunnen beoordelen. Inmiddels heeft het platform een enorme databank van honderdduizenden vragenopgebouwd. 
-
-In de strategie van het bedrijf gaat deze database een grote rol spelen en is hetvan belang dat de vragen van goede kwaliteit zijn. Om de redacteurs te helpen metverbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
-
 De applicatie is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
+
+Om de redacteurs te helpen met verbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
 
 Voorbeelden
 
@@ -62,7 +60,7 @@ Om de demo applicatie te starten:
 ``` 
 .\venv\sripts\activate
 
-python app.py
+python main.py
 ```
 
 # Gebruikte software
