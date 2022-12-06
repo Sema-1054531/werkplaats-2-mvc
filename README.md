@@ -1,30 +1,38 @@
+# Informatie
 
-# Maak een CRUD App met Python en Flask
-Een simpele CRUD (Create, Read, Update, Delete) Het Vragen-hospitaal. In Python en de micro-framework Flask
+De applicatie is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
+
+Om de redacteurs te helpen met verbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
 
 Voorbeelden
 
-Pagina 1.
+Pagina 1
 
-Pagina 2.
+Pagina 2
 
 etc..
 
-# App info
+# Vereisten
 
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en SCSS, het is gemakkelijk te gebruiken om HTML en CSS en ook JS als front-end library te gebruiken. Als database maken we gebruik van SQLite
+De gebruikers van dit platform zullen de redacteurs van de databank worden. We willen heneen platform bieden dat op basis van een aantal bekende patronen vraag items toont meteen probleem en de redacteur de mogelijkheid geeft deze te verbeteren of te exporteren.
 
-# Lijst van features
+De applicatie zou normaliter direct op de database in prikken, maar die is heel groot. Test-correct heeft voor ons een demo dataset met vragen en een beperkt aantal kolommenvoorbereid (zonder antwoorden en metadata) die de nu bekende problemen illustreren.
 
-* Gebruiker moet kunnen registeren
-* Gebruiker moet kunnen inloggen
-* Een profiel pagina waar je gegevens kan aanpassen
-* Rollen aanmaken zoals admin, redacteur, gebruiker
-* Admin kan updaten, toevoegen, en verwijderen
-* Admin kan rollen aanmaken, verwijderen en updaten
-* Gebruiker (niet-admin) heeft toegang tot de dashboard alleen content niks anders
-* Admin heeft toegang tot alle mogelijkheden in de dashboard
-* Gebruik maken van berichten zoals error, warning, succes zodat de gebruiker eenvoudig door de pagina van de app kan navigeren.
+~~Gebruiker moet kunnen registreren~~
+- [ ] De interface en styling moet aansluiten bij test-correct huisstijl
+- [x] Geautoriseerde gebruikers moeten kunnen inloggen
+- [x] Dashboard overzicht menu waar de gebruiker de keuze kan maken voor de eerder benoemde problemen
+- [ ] Redacteur wilt na het lezen van een vraag een opzoeklijst naar de juiste item kunnen kiezen, wijzigen en opslaan
+- [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" en deze kunnen wijzigen
+- [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
+- [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
+- [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
+- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
+- [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
+- [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
+- [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
+- [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
+
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
@@ -33,38 +41,35 @@ Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie
 - De Flask server
 - HTML & Style sheets
 
-
 # Installatie en setup
 Om Flask te kunnen starten zul je eerst de Flask packages moeten installeren. Wil je latere problemen met versies voorkomen, dan raden we je aan een virtual environment te maken en daar de modules in te 
 installeren:  
 
 ```
 pip install virtualenv
+
 virtualenv venv
+
 .\venv\sripts\activate
+
 pip install -r requirements.txt
 ```
-
 Om de demo applicatie te starten: 
 ``` 
 .\venv\sripts\activate
-python app.py
+
+python main.py
 ```
 
 # Gebruikte software
-
-# Hoe gebruik je deze repo
-
-# Instructies voor development
-
-# Setup en installeren
-
-# Starten van de app
-
+- Python
+- Flask
+- Bootstrap
+- Html
+- Css
 
 # Credits
 
 Nadir, Martijn, Romius, Thijs, Sema
 
 Overige links hieronder license, copyright etc.
-
