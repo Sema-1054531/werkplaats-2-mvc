@@ -52,7 +52,7 @@ def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html', username=session['username']) 
+        return render_template('home.html', username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
@@ -67,7 +67,7 @@ def auteurs():
 @app.route('/home/vragen')
 def vragen():
     cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM vragen")
+    cursor.execute(f"SELECT * FROM vragen ")
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
     return render_template('home.html', rows=rows, columns=columns)
@@ -79,6 +79,8 @@ def leerdoelen():
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
     return render_template('home.html', rows=rows, columns=columns)
+
+
 
 # profile pageonly accessible for loggedin users
 @app.route('/profile')
