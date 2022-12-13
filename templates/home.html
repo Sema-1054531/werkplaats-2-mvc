@@ -7,12 +7,18 @@
     <!-- <p>Welcome back, {{ username }}!</p> -->
 
 <body>
-
 <div>
         <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
         <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
         <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
         <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
+        {% set nextpage=pageend + 10 %}
+        {% set previouspage=pagestart - 10 %}
+        Resultaten van {{  pagestart }} tot {{ pageend }}
+        {%  if previouspage >= 0 %}
+        <a href="/home/vragen/{{ previouspage }}/{{ pagestart }}">Vorige pagina</a>
+        {% endif %}
+        <a href="/home/vragen/{{ pageend }}/{{ nextpage }}">Volgende pagina</a>
 </div>
     <table class='table table-bordered'>
         <tr>
@@ -29,10 +35,10 @@
                 {% endfor %}
             <td>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editVraagModal">Wijzig
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editVraagModal{{ row[0] }}">Wijzig
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="editVraagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="editVraagModal{{ row[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -42,23 +48,24 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form method="post" action="/home/vragen/opslaan/{{ row[0] }}">
                         <div class="modal-body">
                             <!-- Hier komt de editformulier, dit formulier gaat ik de vraag aanpassen op basis van de nieuwe values die ik meegeef in de formulier -->
-                            <form>
                                 <div class="form-group">
-                                    <label for="exampleFormControlInput1">ID</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1">
+                                    <p>id:{{ row[0] }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Wijzig vraag</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="vraag" rows="3">{{ row[2] }}</textarea>
                                 </div>
-                            </form>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Opslaan</button>
+                            <input type="submit" class="btn btn-primary" value="Opslaan">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                         </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
