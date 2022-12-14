@@ -65,7 +65,6 @@ def auteurs():
     return render_template('home.html', rows=rows, columns=columns)
 
 
-
 @app.route('/home/vragen')
 @app.route('/home/vragen/<int:start>/<int:eind>')
 def vragen(start=0, eind=10):
