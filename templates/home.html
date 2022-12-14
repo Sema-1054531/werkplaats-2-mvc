@@ -3,37 +3,82 @@
 {% block title %}Home - auteurs{% endblock %}
 
 {% block content %}
-<h2>Dashboard</h2>
-<!-- <p>Welcome back, {{ username }}!</p> -->
+    <h2>Dashboard</h2>
+    <!-- <p>Welcome back, {{ username }}!</p> -->
 
 <body>
-
-    <div>
+<div>
         <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
         <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
         <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
         <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
-    </div>
+        {% set nextpage=pageend + 10 %}
+        {% set previouspage=pagestart - 10 %}
+        Resultaten van {{  pagestart }} tot {{ pageend }}
+        {%  if previouspage >= 0 %}
+        <a href='/home/vragen/{{ previouspage }}/{{ pagestart }}' class='btn btn-outline-primary'>Vorige pagina</a>
+        {% endif %}
+        <a href='/home/vragen/{{ pageend }}/{{ nextpage }}' class='btn btn-outline-primary'>Volgende pagina</a>
 
+</div>
     <table class='table table-bordered'>
         <tr>
             {% for column in columns %}
-            <th>{{ column }}</th>
+                <th>{{ column }}</th>
             {% endfor %}
         </tr>
         <tbody>
-            {% for row in rows %}
+        {% for row in rows %}
             <tr>
                 {% for field in row %}
-                <td>{{ field }}</td>
+                    <td>{{ field }}</td>
+
                 {% endfor %}
+            <td>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editVraagModal{{ row[0] }}">Wijzig
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="editVraagModal{{ row[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Wijzig vraag</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post" action="/home/vragen/opslaan/{{ row[0] }}">
+                        <div class="modal-body">
+                            <!-- Hier komt de editformulier, dit formulier gaat ik de vraag aanpassen op basis van de nieuwe values die ik meegeef in de formulier -->
+                                <div class="form-group">
+                                    <p>ID {{ row[0] }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Wijzig vraag</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="vraag" rows="3">{{ row[2] }}</textarea>
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Opslaan">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                        </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
+
 
     </table>
 
-</body>
+    </body>
 
-</html>
+    </html>
 {% endblock %}

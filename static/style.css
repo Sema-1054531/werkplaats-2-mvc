@@ -6,12 +6,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     background-color: #f0f2f5;
     margin: 0;
   }
-  
+
   .login, .register {
     width: 400px;
     background-color: #ffffff;
@@ -20,7 +20,7 @@
     margin: 100px auto;
     border-radius:10px;
   }
-  
+
   .login h1, .register h1 {
     text-align: center;
     color: #000;
@@ -28,14 +28,14 @@
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
   }
-  
+
   .login .links, .register .links {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     padding: 0 15px;
   }
-  
+
   .login .links a, .register .links a {
     color: #adb2ba;
     text-decoration: none;
@@ -45,16 +45,12 @@
     padding: 0 10px 10px 10px;
     font-weight: bold;
   }
-  
-  .login .links a:hover, .register .links a:hover {
-    color: #9da3ac;
-  }
-  
+
   .login .links a.active, .register .links a.active {
     border-bottom: 3px solid #3274d6;
     color: #3274d6;
   }
-  
+
   .login form, .register form {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -66,7 +62,7 @@
             justify-content: center;
     padding-top: 20px;
   }
-  
+
   .login form label, .register form label {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -82,7 +78,7 @@
     background-color: #3274d6;
     color: #ffffff;
   }
-  
+
   .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
     width: 310px;
     height: 50px;
@@ -90,7 +86,7 @@
     margin-bottom: 20px;
     padding: 0 15px;
   }
-  
+
   .login form input[type="submit"], .register form input[type="submit"] {
     width: 70%;
     padding: 15px;
@@ -105,73 +101,25 @@
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
   }
-  
+
   .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
     background-color: #2868c7;
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
   }
-  
+
   .navtop {
     background-color: #004df5;
     height: 60px;
     width: 100%;
     border: 0;
   }
-  
+
   .navtop div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin: 0 auto;
-    width: 1000px;
-    height: 100%;
-  }
-  
-  .navtop div h1, .navtop div a {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  
-  .navtop div h1 {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    font-size: 24px;
-    padding: 0;
-    margin: 0;
-    color: #eaebed;
-    font-weight: normal;
-  }
-  
-  .navtop div a {
-    padding: 0 20px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .navtop div a i {
-    padding: 2px 8px 0 0;
-  }
-  
-  .navtop div a:hover {
-    color: #eaebed;
-  }
-  
-  body.loggedin {
-    background-color: #f3f4f7;
-  }
-  
-  .content {
-    width: 1000px;
-    margin: 0 auto;
-  }
-  
+
   .content h2 {
     margin: 0;
     padding: 25px 0;
@@ -179,7 +127,7 @@
     border-bottom: 1px solid #e0e0e3;
     color: #000;
   }
-  
+
   .content > p, .content > div {
     -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -187,20 +135,15 @@
     padding: 25px;
     background-color: #fff;
   }
-  
-  .content > p table td, .content > div table td {
-    padding: 5px;
-  }
-  
+
   .content > p table td:first-child, .content > div table td:first-child {
     font-weight: bold;
     color: #4a536e;
     padding-right: 15px;
   }
-  
+
   .content > div p {
     padding: 5px;
     margin: 0 0 10px 0;
   }
-  /*# sourceMappingURL=style.css.map */
 

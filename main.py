@@ -1,5 +1,4 @@
 from flask import Flask, session, render_template, redirect, url_for, request
-import re
 import sqlite3 
 
 app = Flask(__name__)
@@ -53,7 +52,7 @@ def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html', username=session['username']) 
+        return render_template('home.html', username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
@@ -65,13 +64,25 @@ def auteurs():
     rows = cursor.fetchall()
     return render_template('home.html', rows=rows, columns=columns)
 
+
+
 @app.route('/home/vragen')
-def vragen():
+@app.route('/home/vragen/<int:start>/<int:eind>')
+def vragen(start=0, eind=10):
     cursor = connection.cursor()
     cursor.execute(f"SELECT * FROM vragen")
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
-    return render_template('home.html', rows=rows, columns=columns)
+    rows = rows[start:eind]
+    return render_template('home.html', rows=rows, columns=columns, pagestart=start, pageend=eind)
+
+@app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
+def opslaan(question_id):
+    question_content = request.form["vraag"]
+    cursor = connection.cursor()
+    cursor.execute("UPDATE vragen SET vraag = '" + question_content + "' where id = " + question_id)
+    connection.commit()
+    return redirect(url_for("vragen"))
 
 @app.route('/home/leerdoelen')
 def leerdoelen(): 
@@ -80,6 +91,8 @@ def leerdoelen():
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
     return render_template('home.html', rows=rows, columns=columns)
+
+
 
 # profile pageonly accessible for loggedin users
 @app.route('/profile')

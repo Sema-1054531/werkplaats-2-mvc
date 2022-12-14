@@ -1,8 +1,8 @@
 # Informatie
 
-Een CRUD app maken voor TEST-CORRECT (Het Vragen-hospitaal) 
+De applicatie is geschreven in Python en daarop de web-framework Flask. Voor de front-end gebruiken we bootstrap, het is eenvoudig te gebruiken als front-end library. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) dit is een relationeel databasebeheersystem. 
 
-De app is geschreven in Python en daarop de web-framework Flask. De front-end is gebouwd met Bootstrap en scss, het is gemakkelijk te gebruiken html en css ook javascript als front-end library te gebruiken. Als database maken we gebruik van [SQLite](https://www.sqlite.org/index.html) 
+Om de redacteurs te helpen met verbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
 
 Voorbeelden
 
@@ -14,20 +14,25 @@ etc..
 
 # Vereisten
 
-~~Gebruiker moet kunnen registreren~~
+De gebruikers van dit platform zullen de redacteurs van de databank worden. We willen heneen platform bieden dat op basis van een aantal bekende patronen vraag items toont meteen probleem en de redacteur de mogelijkheid geeft deze te verbeteren of te exporteren.
+
+De applicatie zou normaliter direct op de database in prikken, maar die is heel groot. Test-correct heeft voor ons een demo dataset met vragen en een beperkt aantal kolommenvoorbereid (zonder antwoorden en metadata) die de nu bekende problemen illustreren.
+
 - [ ] De interface en styling moet aansluiten bij test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waar de gebruiker de keuze kan maken voor de eerder benoemde problemen
 - [ ] Redacteur wilt na het lezen van een vraag een opzoeklijst naar de juiste item kunnen kiezen, wijzigen en opslaan
 - [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" en deze kunnen wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
-- [ ] Als een vraag wordt getoond, zet de waarde van het ID op het scherm en maak daar een hyperlink van
+- [ ] De redacteur moet de vraag direct kunnen verbeteren.
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
-- [ ] gebruikers en hun wachtwoorden te kunnen instellen allen met "beheer permissies" (<b>should-have</b>)
-- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, er staan waardes in een kolom die leeg zou moeten zijn
+- [ ] vraag als “uitzondering” te markeren. Uitzonderingen hoeven niet meer getoond te worden in de overzichtslijst.
+- [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
+- [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
+- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
 - [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
-
+- [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
@@ -48,14 +53,12 @@ virtualenv venv
 .\venv\sripts\activate
 
 pip install -r requirements.txt
-
 ```
 Om de demo applicatie te starten: 
 ``` 
-
 .\venv\sripts\activate
 
-python app.py
+python main.py
 ```
 
 # Gebruikte software
