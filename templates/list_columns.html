@@ -1,0 +1,13 @@
+<html>
+
+
+<body>
+    <h1>Selecteer de kolom die u wilt onderzoeken in {{ table }}</h1>
+    <ul>
+        {% for column_name in columns %}
+        <li><a href="/filtering/{{ table }}/{{ column_name }}">{{ column_name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
