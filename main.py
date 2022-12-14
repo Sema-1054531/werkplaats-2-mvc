@@ -49,12 +49,26 @@ def login():
 # home page only accessible for loggedin users
 @app.route('/home')
 def home():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM accounts')
+    data = cursor.fetchall()
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html', username=session['username'])
+         return render_template("home.html", datas=data)
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
+
+@app.route('/home/leerdoelen')
+def leerdoelen():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM leerdoelen')
+    data = cursor.fetchall()
+    return render_template("leerdoelen.html", datas=data)
 
 @app.route('/home/vragen')
 @app.route('/home/vragen/<int:start>/<int:eind>')
