@@ -1,0 +1,26 @@
+<html>
+
+{% extends 'layout.html' %}
+
+{% block title %}Home - Wareit{% endblock %}
+
+{% block content %}
+
+<body>
+    <h1>Kies een tabel voor onderzoek</h1>
+    <ul>
+
+    </ul>
+</body>
+
+<table>
+    <tr>
+        {% for table in tablenames %}
+        <td><a href="/filtering/{{ table }}" class="btn btn-primary">{{ table }}</a></td>
+        {% endfor %}
+    </tr>
+</table>
+
+</html>
+
+{% endblock %}
