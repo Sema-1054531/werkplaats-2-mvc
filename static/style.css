@@ -46,10 +46,6 @@
     font-weight: bold;
   }
 
-  .login .links a:hover, .register .links a:hover {
-    color: #9da3ac;
-  }
-
   .login .links a.active, .register .links a.active {
     border-bottom: 3px solid #3274d6;
     color: #3274d6;
@@ -123,54 +119,6 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin: 0 auto;
-    width: 1000px;
-    height: 100%;
-  }
-
-  .navtop div h1, .navtop div a {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-
-  .navtop div h1 {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    font-size: 24px;
-    padding: 0;
-    margin: 0;
-    color: #eaebed;
-    font-weight: normal;
-  }
-
-  .navtop div a {
-    padding: 0 20px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-  }
-
-  .navtop div a i {
-    padding: 2px 8px 0 0;
-  }
-
-  .navtop div a:hover {
-    color: #eaebed;
-  }
-
-  body.loggedin {
-    background-color: #f3f4f7;
-  }
-
-  .content {
-    width: 1000px;
-    margin: 0 auto;
-  }
 
   .content h2 {
     margin: 0;
@@ -188,10 +136,6 @@
     background-color: #fff;
   }
 
-  .content > p table td, .content > div table td {
-    padding: 5px;
-  }
-
   .content > p table td:first-child, .content > div table td:first-child {
     font-weight: bold;
     color: #4a536e;
@@ -202,4 +146,4 @@
     padding: 5px;
     margin: 0 0 10px 0;
   }
-  /*# sourceMappingURL=style.css.map */
+
