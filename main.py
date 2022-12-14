@@ -22,7 +22,7 @@ def login():
         # Create variables for easy access
         username = request.form['username']
         password = request.form['password']
-        # Check if account exists using MySQL
+        # Check if account exists using Sqlite3
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = ? AND password = ?', (username, password,))
          # Fetch one record and return result
