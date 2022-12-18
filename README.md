@@ -18,21 +18,21 @@ De gebruikers van dit platform zullen de redacteurs van de databank worden. We w
 
 De applicatie zou normaliter direct op de database in prikken, maar die is heel groot. Test-correct heeft voor ons een demo dataset met vragen en een beperkt aantal kolommenvoorbereid (zonder antwoorden en metadata) die de nu bekende problemen illustreren.
 
-~~Gebruiker moet kunnen registreren~~
 - [ ] De interface en styling moet aansluiten bij test-correct huisstijl
 - [x] Geautoriseerde gebruikers moeten kunnen inloggen
 - [x] Dashboard overzicht menu waar de gebruiker de keuze kan maken voor de eerder benoemde problemen
 - [ ] Redacteur wilt na het lezen van een vraag een opzoeklijst naar de juiste item kunnen kiezen, wijzigen en opslaan
 - [ ] Vragen waarin HTML onzichtbare codes meegeeft zoals "break line" en "&nbsp" en deze kunnen wijzigen
 - [ ] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
-- [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
+- [ ] De redacteur moet de vraag direct kunnen verbeteren.
 - [ ] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
+- [ ] vraag als “uitzondering” te markeren. Uitzonderingen hoeven niet meer getoond te worden in de overzichtslijst.
+- [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
+- [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
 - [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
 - [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
 - [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
-- [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
-
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
