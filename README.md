@@ -73,3 +73,5 @@ python main.py
 Nadir, Martijn, Romius, Thijs, Sema
 
 Overige links hieronder license, copyright etc.
+
+# Diederik test :)
