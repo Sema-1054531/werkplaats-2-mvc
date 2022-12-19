@@ -88,14 +88,6 @@ def opslaan(question_id):
     connection.commit()
     return redirect(url_for("vragen"))
 
-@app.route('/home/leerdoelen')
-def leerdoelen(): 
-    cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM leerdoelen")
-    columns = [columns[0] for columns in cursor.description]
-    rows = cursor.fetchall()
-    return render_template('home.html', rows=rows, columns=columns)
-
 @app.route('/')
 @app.route('/filtering/')
 def hello_world():
