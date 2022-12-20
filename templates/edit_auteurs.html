@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class='row'>
+    <div class='col-5 mx-auto'>
+        <h3>Edit auteurs</h3>
+        <hr>
+        <form method='post' action='{{url_for("edit_auteurs",id=datas.id)}}'>
+            <div class='form-group'>
+                <label>voornaam</label>
+                <input type='text' name='voornaam' required class='form-control' value='{{datas.voornaam}}'>
+            </div>
+            <div class='form-group'>
+                <label>achternaam</label>
+                <input type='text' name='achternaam' required class='form-control' value='{{datas.achternaam}}'>
+            </div>
+            <div class='form-group'>
+                <label>geboortejaar</label>
+                <input type='number' min="1960" max="2022" name='geboortejaar' required class='form-control'
+                    value='{{datas.geboortejaar}}'>
+            </div>
+            <div class='form-group'>
+                <label>medewerker</label>
+                <input type='text' name='medewerker' required class='form-control' value='{{datas.medewerker}}'>
+            </div>
+            <div class='form-group'>
+                <label>met_pensioen</label>
+                <input type='text' name='met_pensioen' required class='form-control' value='{{datas.met_pensioen}}'>
+            </div>
+            <input type='submit' value='Submit' class='btn btn-primary'>
+        </form>
+    </div>
+</div>
+{% endblock %}

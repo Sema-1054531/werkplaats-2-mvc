@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class='row'>
+    <div class='col-5 mx-auto'>
+        <h3>Edit user</h3>
+        <hr>
+        <form method='post' action='{{url_for("edit_leerdoelen",id=datas.id)}}'>
+            <div class='form-group'>
+                <label>leerdoelen</label>
+                <input type='text' name='leerdoel' required class='form-control' value='{{datas.leerdoel}}'>
+            </div>
+
+            <input type='submit' value='Submit' class='btn btn-primary'>
+        </form>
+    </div>
+</div>
+{% endblock %}

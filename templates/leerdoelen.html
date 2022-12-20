@@ -1,10 +1,10 @@
 {% extends 'layout.html' %}
 
-{% block title %}Test-Correct / accounts{% endblock %}
+{% block title %}Test-Correct / leerdoelen{% endblock %}
 
 {% block content %}
 
-<h2>Dashboard-> accounts</h2>
+<h2>Dashboard-> leerdoelen</h2>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -30,7 +30,7 @@
 
 <div>
     <a href='/home' class='btn btn-primary'>Accounts</a>
-    <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
+    <a href='/home' class='btn btn-primary'>Auteurs</a>
     <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
     <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
     <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
@@ -92,26 +92,26 @@
             <thead>
                 <tr>
                     <td>id</td>
-                    <td>username</td>
-                    <td>password</td>
-                    <td>email</td>
+                    <td>leerdoelen</td>
+                    <!-- <td>password</td>
+                    <td>email</td> -->
                     <td>edit</td>
                     <td>delete</td>
                     <!-- <td><b>delete</b></td> -->
                 </tr>
             </thead>
             <tbody>
-                {% for row in datas %}
+                {% for row in leerdoelen %}
                 <tr>
                     <td>{{loop.index}}</td>
-                    <td>{{row.username}}</td>
-                    <td>{{row.password}}</td>
-                    <td>{{row.email}}</td>
+                    <td>{{row.leerdoel}}</td>
+                    <!-- <td>{{row.password}}</td>
+                    <td>{{row.email}}</td> -->
                     <td width="">
-                        <a href="/edit_user/{{row.id}}" class="fas fa-pen"></a>
+                        <a href="/edit_leerdoelen/{{row.id}}" class="fas fa-pen"></a>
                     </td>
                     <td>
-                        <a href="/delete_user/{{row.id}}" class="fas fa-trash"></a>
+                        <a href="/delete_leerdoelen/{{row.id}}" class="fas fa-trash"></a>
                     </td>
                 </tr>
                 {% endfor %}
