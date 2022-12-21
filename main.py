@@ -1,7 +1,11 @@
-from flask import Flask, session, render_template, redirect, url_for, request
+from flask import Flask, session, render_template, redirect, url_for, request, flash
 import sqlite3 
 
+from lib.questionmodel import QuestionModel
 app = Flask(__name__)
+
+database_file = "databases/testcorrect_vragen.db"
+question_model = QuestionModel(database_file)
 
 # Change this to your secret key (can be anything, it's for extra protection)
 app.secret_key = 'your secret key'
