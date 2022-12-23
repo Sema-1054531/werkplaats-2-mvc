@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}{% endblock %}</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="/static/testcorrect-logo.svg" />
 
 	<!-- Datatable CSS -->
 	<link href='https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+
+	<!-- jQuery Library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+
+	<!-- Datatable JS -->
+	<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 
 	<!-- jQuery Library -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
@@ -20,7 +29,8 @@
 <body class="loggedin">
 	<nav class="navtop">
 		<div>
-			<h1>WAREIT</h1>
+
+			<h1>Test-Correct</h1>
 			<a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
 			<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>{{ session['username'] }}</a>
 			<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -47,7 +57,7 @@
 
 	<script>
 
-		// delete 
+		// delete
 		const btnDelete = document.querySelectorAll('.fa-trash');
 		if (btnDelete) {
 			const btnArray = Array.from(btnDelete);
