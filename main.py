@@ -62,7 +62,7 @@ def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html', username=session['username'])
+        return render_template('home.html', datas=data,username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
@@ -182,7 +182,7 @@ def edit_auteurs(id):
         cursor = connection.cursor()
         cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
         connection.commit()
-        flash('User Updated','success')
+        flash('Auteurs Updated','success')
         return redirect(url_for("auteurs"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -194,12 +194,12 @@ def edit_auteurs(id):
 @app.route("/edit_leerdoelen/<string:id>",methods=['POST','GET'])
 def edit_leerdoelen(id):
     if request.method=='POST':
-        leerdoelen = request.form['leerdoelen']
+        leerdoel = request.form['leerdoel']
         connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
         cursor = connection.cursor()
-        cursor.execute("update leerdoelen set leerdoel=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
+        cursor.execute("update leerdoelen set leerdoel=? where id=?",(leerdoel,id))
         connection.commit()
-        flash('User Updated','success')
+        flash('Leerdoelen Updated','success')
         return redirect(url_for("leerdoelen"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
