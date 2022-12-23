@@ -1,7 +1,8 @@
 from flask import Flask, session, render_template, redirect, url_for, request, flash
-import sqlite3 
+import sqlite3
 
 from lib.questionmodel import QuestionModel
+
 app = Flask(__name__)
 
 database_file = "databases/testcorrect_vragen.db"
@@ -15,10 +16,10 @@ connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thr
 
 # login page, we need to use both GET and POST requests
 # @app.route('/')
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row 
+    connection.row_factory = sqlite3.Row
     # Output message if something goes wrong...
     msg = ''
     # Check if "username" and "password" POST requests exist (user submitted form)
@@ -35,15 +36,15 @@ def login():
         if account:
             # Accessing columns by name instead of by index
             for account in cursor:
-                assert session['loggedin'] == True
-                assert session['id'] == account['id']
-                assert session['username'] == account['username']
+                session['loggedin'] == True
+                session['id'] == account['id']
+                session['username'] == account['username']
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            return redirect(url_for('home')) 
+            return redirect(url_for('home'))
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -61,7 +62,7 @@ def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-         return render_template("home.html", datas=data)
+        return render_template('home.html', username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
@@ -72,7 +73,33 @@ def leerdoelen():
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM leerdoelen')
     data = cursor.fetchall()
-    return render_template("leerdoelen.html", datas=data)
+    return render_template("leerdoelen.html", leerdoelen=data)
+
+@app.route('/home/auteurs')
+def auteurs():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM auteurs')
+    data = cursor.fetchall()
+    return render_template("auteurs.html", auteurs=data)
+
+# profile page only accessible for loggedin users
+@app.route('/profile')
+def profile():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # We get all the account info from session for the profile page
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE id = ?', (session['id'],))
+        account = cursor.fetchone()
+        # Show the profile page with account info
+        return render_template('profile.html', account=account)
+        # role=session['role'])
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
 
 @app.route('/home/vragen')
 @app.route('/home/vragen/<int:start>/<int:eind>')
@@ -82,7 +109,7 @@ def vragen(start=0, eind=10):
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
     rows = rows[start:eind]
-    return render_template('home.html', rows=rows, columns=columns, pagestart=start, pageend=eind)
+    return render_template('vragen.html', rows=rows, columns=columns)
 
 @app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
 def opslaan(question_id):
@@ -108,6 +135,7 @@ def filter_table_on_column(table_name, column_name):
     datatype = "boolean"
     values = question_model.get_unconvertable_values(table_name, column_name, datatype)
     return render_template("list_unconvertable.html", values=values, table=table_name, column=column_name, datatype=datatype)
+
 # add user
 @app.route('/home/add_user', methods=['POST','GET'])
 def add_user():
@@ -141,7 +169,45 @@ def edit_user(id):
     cursor.execute("select * from accounts where id=?",(id,))
     data = cursor.fetchone()
     return render_template("edit_user.html",datas=data)
-    
+
+@app.route("/edit_auteurs/<string:id>",methods=['POST','GET'])
+def edit_auteurs(id):
+    if request.method=='POST':
+        voornaam = request.form['voornaam']
+        achternaam = request.form['achternaam']
+        geboortejaar = request.form['geboortejaar']
+        medewerker = request.form['medewerker']
+        met_pensioen = request.form['met_pensioen']
+        connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+        cursor = connection.cursor()
+        cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
+        connection.commit()
+        flash('User Updated','success')
+        return redirect(url_for("auteurs"))
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute("select * from auteurs where id=?",(id,))
+    data = cursor.fetchone()
+    return render_template("edit_auteurs.html",datas=data)
+
+@app.route("/edit_leerdoelen/<string:id>",methods=['POST','GET'])
+def edit_leerdoelen(id):
+    if request.method=='POST':
+        leerdoelen = request.form['leerdoelen']
+        connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+        cursor = connection.cursor()
+        cursor.execute("update leerdoelen set leerdoel=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
+        connection.commit()
+        flash('User Updated','success')
+        return redirect(url_for("leerdoelen"))
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute("select * from leerdoelen where id=?",(id,))
+    data = cursor.fetchone()
+    return render_template("edit_leerdoelen.html",datas=data)
+
 @app.route("/delete_user/<string:id>",methods=['GET'])
 def delete_user(id):
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
@@ -151,34 +217,17 @@ def delete_user(id):
     flash('User Deleted','warning')
     return redirect(url_for("home"))
 
-# profile pageonly accessible for loggedin users
-@app.route('/profile')
-def profile():
-    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row 
-    # Check if user is loggedin
-    if 'loggedin' in session:
-        # We need all the account info for the user so we can display it on the profile page
-        cursor = connection.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE id = ?', (session['id'],))
-        account = cursor.fetchone()
-        # Show the profile page with account info
-        return render_template('profile.html', account=account) 
-        # this can be used to assign privileges 
-        # role=session['role'])
-    # User is not loggedin redirect to login page
-    return redirect(url_for('login'))
-
 # logout page
 @app.route('/logout')
 def logout():
-    # Remove session data, this will log the user out
+   # remove session data, this will log the user out
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
-   # Redirect to login page
+   # redirect to login page
    return redirect(url_for('login'))
 
+# run app
 if __name__ == '__main__':
-    app.debug = True
+    app.run(debug=True)
     app.run()

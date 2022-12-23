@@ -79,8 +79,9 @@ body {
           align-items: center;
   width: 50px;
   height: 50px;
-  background-color: #3274d6;
-  color: #ffffff;
+  /* background-color: #3274d6; */
+  /* color: #ffffff; */
+
 }
 
 .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
@@ -92,18 +93,29 @@ body {
 }
 
 .login form input[type="submit"], .register form input[type="submit"] {
+  align-items: center;
+  background: #004df5;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 700;
+  -webkit-justify-content: center;
+  justify-content: center;
+  min-height: 40px;
+  padding-left: 17px;
+  padding-right: 17px;
+  position: relative;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  width: auto;
   width: 70%;
-  padding: 15px;
   margin-top: 20px;
   margin-bottom: 40px;
-  border-radius:10px;
-  background-color: #3274d6;
-  border: 0;
-  cursor: pointer;
-  font-weight: bold;
-  color: #ffffff;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+  border-radius: 10px;
+  cursor:pointer;
 }
 
 .login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
@@ -233,3 +245,10 @@ main .content-header .search i {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.centeralogo {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%, -50%);
+}
