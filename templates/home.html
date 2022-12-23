@@ -12,14 +12,6 @@
         <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
         <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
         <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
-        {% set nextpage=pageend + 10 %}
-        {% set previouspage=pagestart - 10 %}
-        Resultaten van {{  pagestart }} tot {{ pageend }}
-        {%  if previouspage >= 0 %}
-        <a href='/home/vragen/{{ previouspage }}/{{ pagestart }}' class='btn btn-outline-primary'>Vorige pagina</a>
-        {% endif %}
-        <a href='/home/vragen/{{ pageend }}/{{ nextpage }}' class='btn btn-outline-primary'>Volgende pagina</a>
-
 </div>
     <table class='table table-bordered'>
         <tr>
@@ -66,18 +58,9 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
                         </div>
                         </form>
+                    </tr>
+                {% endfor %}
         </tbody>
-                    </div>
-                </div>
-            </div>
-            </td>
-            </tr>
-     </div>
-        </div>
-    </div>
-</div>
-  {% block body %}
-
     </table>
     </div>
 </div>
