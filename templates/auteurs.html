@@ -6,82 +6,11 @@
 
 <h2>Dashboard-> auteurs</h2>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div>
     <a href='/home' class='btn btn-primary'>Accounts</a>
-    <a href='/home' class='btn btn-primary'>Auteurs</a>
+    <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
     <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
     <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
-    <!-- <a class='text-right'><a href='' class='btn btn-success'>Add User</a> -->
-</div>
-
-<!-- Modal Hieronder moet ik een forumlier bouwen dmv bootstrap en dat formulier moet een call kunnen maken naar database
-    en python om een vraag aan te passen -->
-<div class="modal fade" id="editVraagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Wijzig de vraag</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Hier komt de editformulier, dit formulier gaat ik de vraag aanpassen op basis van de nieuwe values die ik meegeef in de formulier -->
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">ID</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Leerdoel</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Wijzig vraag:</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Opslaan</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- {% endblock %} -->
@@ -99,7 +28,6 @@
                     <td>met_pensioen</td>
                     <td>edit</td>
                     <td>delete</td>
-                    <!-- <td><b>delete</b></td> -->
                 </tr>
             </thead>
             <tbody>

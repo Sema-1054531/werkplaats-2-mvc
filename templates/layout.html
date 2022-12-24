@@ -23,8 +23,10 @@
 <body class="loggedin">
 	<nav class="navtop">
 		<div>
-
-			<h1>Test-Correct</h1>
+			<a href="#" class="navbar-brand">
+				<img src="/static/testcorrect-logo.svg" height="50" alt="testcorrect">
+			</a>
+			<h1></h1>
 			<a href="{{ url_for('home') }}"><i class="fas fa-home"></i>Home</a>
 			<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>{{ session['username'] }}</a>
 			<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
