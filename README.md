@@ -26,17 +26,13 @@ De applicatie zou normaliter direct op de database in prikken, maar die is heel 
 - [x] De gehele vraag moet zichtbaar zijn. auteur en leerdoel als <b>tekst</b> niet als <b>id</b>
 - [x] De redacteur moet de vraag direct kunnen verbeteren.
 - [x] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
-- [x] vraag als “uitzondering” te markeren. Uitzonderingen hoeven niet meer getoond te worden in de overzichtslijst.
-
-
+- [x] vraag als “uitzondering” te markeren. Uitzonderingen hoeven niet meer getoond te worden in de overzichtslijst
 - [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
 - [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
+- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
+- [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
-- [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
-- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
-- [ ] Redacteuren willen alle rijen zien waarvan een kolom tussen bepaalde waardes valt
-- [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
 # werkplaats2_starter
 Starter repository voor Werkplaats 2. Deze repository bevat een Flask applicatie met een aantal van de componenten die we ook nodig hebben om de werkplaats opdracht uit te voeren: 
