@@ -15,7 +15,7 @@ app.secret_key = 'your secret key'
 connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
 
 # login page, we need to use both GET and POST requests
-# @app.route('/')
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
@@ -66,6 +66,7 @@ def home():
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
+# get leerdoelen list
 @app.route('/home/leerdoelen')
 def leerdoelen():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
@@ -75,6 +76,7 @@ def leerdoelen():
     data = cursor.fetchall()
     return render_template("leerdoelen.html", leerdoelen=data)
 
+# get auteurs list
 @app.route('/home/auteurs')
 def auteurs():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
@@ -84,23 +86,30 @@ def auteurs():
     data = cursor.fetchall()
     return render_template("auteurs.html", auteurs=data)
 
-# profile page only accessible for loggedin users
-@app.route('/profile')
-def profile():
-    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row
-    # Check if user is loggedin
-    if 'loggedin' in session:
-        # We get all the account info from session for the profile page
-        cursor = connection.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE id = ?', (session['id'],))
-        account = cursor.fetchone()
-        # Show the profile page with account info
-        return render_template('profile.html', account=account)
-        # role=session['role'])
-    # User is not loggedin redirect to login page
-    return redirect(url_for('login'))
+# deze functie return de lijst met ids van ongeldige vragen
+def find_invalid_questions():
+    cursor = connection.cursor()
+    invalid_questions_sql = 'SELECT * FROM vragen WHERE ((leerdoel NOT IN (SELECT id FROM leerdoelen)) OR (auteur NOT IN (SELECT id FROM auteurs)) or (vraag LIKE "%<br>%" OR vraag LIKE "%&nbsp%")) and (id not in (SELECT vraag_id from EXCEPTIE_VRAAG))'
+    cursor.execute(invalid_questions_sql)
+    rows = cursor.fetchall()
+    invalid_questions_ids = [row[0] for row in rows]
+    return invalid_questions_ids
 
+# zoek de lijst van leerdoelen
+def find_learning_objectives():
+    cursor = connection.cursor()
+    cursor.execute('''SELECT * FROM leerdoelen''')
+    rows = cursor.fetchall()    
+    return rows
+
+# zoek de lijst van auteurs
+def find_authors():
+    cursor = connection.cursor()
+    cursor.execute('''SELECT * FROM auteurs''')
+    rows = cursor.fetchall()    
+    return rows
+
+# edit vragen
 @app.route('/home/vragen')
 @app.route('/home/vragen/<int:start>/<int:eind>')
 def vragen(start=0, eind=10):
@@ -111,6 +120,7 @@ def vragen(start=0, eind=10):
     rows = rows[start:eind]
     return render_template('vragen.html', rows=rows, columns=columns)
 
+# save vragen
 @app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
 def opslaan(question_id):
     question_content = request.form["vraag"]
@@ -118,23 +128,6 @@ def opslaan(question_id):
     cursor.execute("UPDATE vragen SET vraag = '" + question_content + "' where id = " + question_id)
     connection.commit()
     return redirect(url_for("vragen"))
-
-@app.route('/')
-@app.route('/filtering/')
-def hello_world():
-    tables = question_model.get_tables()
-    return render_template('list_tables.html', tablenames=tables)
-
-@app.route('/filtering/<table_name>')
-def filter_table(table_name):
-    columns = question_model.get_columns(table_name)
-    return render_template('list_columns.html', columns=columns, table=table_name)
-
-@app.route('/filtering/<table_name>/<column_name>/')
-def filter_table_on_column(table_name, column_name):
-    datatype = "boolean"
-    values = question_model.get_unconvertable_values(table_name, column_name, datatype)
-    return render_template("list_unconvertable.html", values=values, table=table_name, column=column_name, datatype=datatype)
 
 # add user
 @app.route('/home/add_user', methods=['POST','GET'])
@@ -151,6 +144,7 @@ def add_user():
         return redirect(url_for("add_user"))
     return render_template("add_user.html")
 
+# edit user
 @app.route("/edit_user/<string:id>",methods=['POST','GET'])
 def edit_user(id):
     if request.method=='POST':
@@ -191,6 +185,7 @@ def edit_auteurs(id):
     data = cursor.fetchone()
     return render_template("edit_auteurs.html",datas=data)
 
+# edit leerdoelen
 @app.route("/edit_leerdoelen/<string:id>",methods=['POST','GET'])
 def edit_leerdoelen(id):
     if request.method=='POST':
@@ -208,6 +203,7 @@ def edit_leerdoelen(id):
     data = cursor.fetchone()
     return render_template("edit_leerdoelen.html",datas=data)
 
+# delete user
 @app.route("/delete_user/<string:id>",methods=['GET'])
 def delete_user(id):
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
@@ -216,6 +212,23 @@ def delete_user(id):
     connection.commit()
     flash('User Deleted','warning')
     return redirect(url_for("home"))
+
+# profile page only accessible for loggedin users
+@app.route('/profile')
+def profile():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # We get all the account info from session for the profile page
+        cursor = connection.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE id = ?', (session['id'],))
+        account = cursor.fetchone()
+        # Show the profile page with account info
+        return render_template('profile.html', account=account)
+        # role=session['role'])
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
 
 # logout page
 @app.route('/logout')
@@ -226,6 +239,23 @@ def logout():
    session.pop('username', None)
    # redirect to login page
    return redirect(url_for('login'))
+
+# @app.route('/')
+@app.route('/filtering/')
+def hello_world():
+    tables = question_model.get_tables()
+    return render_template('list_tables.html', tablenames=tables)
+
+@app.route('/filtering/<table_name>')
+def filter_table(table_name):
+    columns = question_model.get_columns(table_name)
+    return render_template('list_columns.html', columns=columns, table=table_name)
+
+@app.route('/filtering/<table_name>/<column_name>/')
+def filter_table_on_column(table_name, column_name):
+    datatype = "boolean"
+    values = question_model.get_unconvertable_values(table_name, column_name, datatype)
+    return render_template("list_unconvertable.html", values=values, table=table_name, column=column_name, datatype=datatype)
 
 # run app
 if __name__ == '__main__':

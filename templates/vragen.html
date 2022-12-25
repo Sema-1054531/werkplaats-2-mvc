@@ -14,117 +14,51 @@
     <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
+{% if questions_page %}
+<div>
+    <h3>Ongeldige vragen kunnen worden bewerkt (<i class="fas fa-edit"></i>) of gemarkeerd als uitzondering (<i
+            class="fas fa-check-circle"></i>)</h3>
+    <p>Vragen kunnen om de volgende redenen ongeldig zijn:</p>
+    <ul>
+        <li>Vraag heeft ongeldig leerdoel of null.</li>
+        <li>Vraag heeft verkeerde auteur, of auteur bestaat niet.</li>
+        <li>Vraag bevat HTML of systeemcodes zoals <code>&lt;br&gt; of nbsp</code></li>
+    </ul>
 </div>
+{% endif %}
 
-<!-- Modal Hieronder moet ik een forumlier bouwen dmv bootstrap en dat formulier moet een call kunnen maken naar databaseen python om een vraag aan te passen -->
-<div class="modal fade" id="editVraagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Wijzig de vraag</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Hier komt de editformulier, dit formulier gaat ik de vraag aanpassen op basis van de nieuwe values die ik meegeef in de formulier -->
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">ID</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Leerdoel</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Wijzig vraag:</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Opslaan</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-            </div>
-        </div>
-    </div>
-</div>
+<table class='table table-bordered'>
+    <tr>
+        {% for column in columns %}
+        <th>{{ column }}</th>
+        {% endfor %}
+    </tr>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% for field in row %}
+            <td>{{ field }}</td>
+            {% endfor %}
 
-<td>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-        data-target="#editVraagModal{{ row[0] }}">Wijzig
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="editVraagModal{{ row[0] }}" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Wijzig vraag</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="post" action="/home/vragen/opslaan/{{ row[0] }}">
-                    <div class="modal-body">
-                        <!-- Hier komt de editformulier, dit formulier gaat ik de vraag aanpassen op basis van de nieuwe values die ik meegeef in de formulier -->
-                        <div class="form-group">
-                            <span class="input-group-text">ID {{ row[0] }}</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Wijzig vraag</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="vraag"
-                                rows="3">{{ row[2] }}</textarea>
-                        </div>
+            {% if questions_page %}
+            {% if invalid_questions_status[row[0]] %}
+            <td><a href='/home/edit_question/{{row[0]}}'><i class="fas fa-edit"></i></a>
+                <a href='/home/set_question_as_exception/{{row[0]}}'><i class="fas fa-check-circle"></i></a>
+            </td>
+            {% else %}
+            <td>
+                <a href='https://test-correct.nl/?vraag={{ row[0] }}' target="_blank"><i class="fas fa-link"></i>
+            </td>
+            {% endif %}
 
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" value="Opslaan">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                    </div>
-                </form>
-                </tr>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
 
-                </tbody>
-                </table>
-            </div>
-        </div>
+</table>
 
-        </body>
+</body>
 
-        </html>
-        {% endblock %}
+</html>
+{% endblock %}
