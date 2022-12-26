@@ -27,9 +27,9 @@ De applicatie zou normaliter direct op de database in prikken, maar die is heel 
 - [x] De redacteur moet de vraag direct kunnen verbeteren.
 - [x] Bij een vraag zou je een "terug naar lijst" knop willen zien, en na het bijwerken terug springen naar deze lijst
 - [x] vraag als “uitzondering” te markeren. Uitzonderingen hoeven niet meer getoond te worden in de overzichtslijst
+- [x] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
 - [ ] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
-- [ ] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
-- [ ] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
+- [-] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
 - [ ] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
 - [ ] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
