@@ -120,7 +120,7 @@ def vragen(start=0, eind=10):
     rows = rows[start:eind]
     return render_template('vragen.html', rows=rows, columns=columns)
 
-# save vragen
+# save / update vragen
 @app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
 def opslaan(question_id):
     question_content = request.form["vraag"]
