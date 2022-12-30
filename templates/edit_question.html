@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}Test-correct / Bewerk Vraag{% endblock %}
+
+{% block content %}
+<!-- <h2>Bewerk Vraag</h2> -->
+<div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-7 p-5 rounded border">
+                <h3 class="text-center">Bewerk vraag</h3>
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold">Vraag:</label><br />
+                        <textarea class="form-control" placeholder="Enter vraag statement" name="question"
+                            row="5">{{question[2]}}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold">Leerdoel:</label><br />
+                        <select class="form-control" name="learning_objective">
+                            {% for obj in learning_objectives %}
+                            {% if question[1]==obj[0] %}
+                            <option selected value="{{obj[0]}}">{{obj[1]}}</option>
+                            {% else %}
+                            <option value="{{obj[0]}}">{{obj[1]}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold">Auteur:</label><br />
+                        <select class="form-control" placeholder="Enter question statement" name="author">
+                            {% for author in authors %}
+                            {% if author[0]==question[3] %}
+                            <option selected value="{{author[0]}}">{{author[1]}}</option>
+                            {% else %}
+                            <option value="{{author[0]}}">{{author[1]}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                        <a class="btn btn-primary" href="/home/vragen" role="button">Return</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
