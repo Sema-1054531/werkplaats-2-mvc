@@ -134,22 +134,6 @@ def find_authors():
     rows = cursor.fetchall()    
     return rows
 
-<<<<<<< Updated upstream
-# edit vragen
-@app.route('/home/vragen')
-def vragen():
-    cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM vragen")
-    columns = [columns[0] for columns in cursor.description]
-    rows = cursor.fetchall()
-    rows = rows
-    return render_template('vragen.html', rows=rows, columns=columns)
-
-# save / update vragen
-@app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
-def opslaan(question_id):
-    question_content = request.form["vraag"]
-=======
 # edit vraag
 @app.route('/home/edit_question/<int:id>', methods=['GET', 'POST'])
 def edit_question(id):
@@ -177,7 +161,6 @@ def edit_question(id):
 # set vraag als exceptie
 @app.route('/home/set_question_as_exception/<int:id>')
 def set_question_as_exception(id):
->>>>>>> Stashed changes
     cursor = connection.cursor()
     if 'loggedin' not in session:
         return redirect(url_for('login'))
@@ -327,16 +310,9 @@ def filter_table_on_column(table_name, column_name):
 # select-table
 @app.route('/select-table')
 def select_table():
-    # Create a cursor
     cursor = connection.cursor()
-
-    # Get the list of tables
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-
-    # Fetch the tables
     tables = cursor.fetchall()
-
-    # Close the cursor
     cursor.close()
 
     return render_template('select-table.html', tables=tables)
@@ -344,34 +320,42 @@ def select_table():
 # display-table
 @app.route('/display-table', methods=['POST'])
 def display_table():
-
     # Get the selected table
     table = request.form['table']
-    
-    # Create a cursor
     cursor = connection.cursor()
-
-    # Select all rows where the column is NULL
     cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
-    
-    # Fetch the rows
     rows = cursor.fetchall()
-   
-    # Get the column names
     cursor.execute(f"PRAGMA table_info( {table} )")
-
     columns = cursor.fetchall()
-
-    # Get the list of tables
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-
-    # Fetch the tables
     tables = cursor.fetchall()
-
-    # Close the cursor
     cursor.close()
 
     return render_template('select-table.html', tables=tables, table=table, rows=rows, columns=columns)
+
+@app.route('/download-csv/<table>')
+def download_csv(table):
+    cursor = connection.cursor()
+    cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
+    rows = cursor.fetchall()
+    cursor.execute(f"PRAGMA table_info( {table} )")
+    columns = cursor.fetchall()
+    cursor.close()
+
+    # Generate CSV data from the table data
+    csv_data = StringIO()
+    csv_writer = csv.writer(csv_data, quotechar='"')
+    csv_writer.writerow([column[1] for column in columns])
+    csv_writer.writerows(rows)
+    csv_data.seek(0)
+    csv_str = csv_data.read()
+
+    # Set the response headers to indicate that the file is a CSV file
+    # and prompt the browser to download it
+    response = make_response(csv_str)
+    response.headers["Content-Disposition"] = f"attachment; filename={table}.csv"
+    response.headers["Content-type"] = "text/csv"
+    return response
 
 # logout page
 @app.route('/logout')
