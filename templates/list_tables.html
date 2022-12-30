@@ -1,24 +1,26 @@
-<html>
-
 {% extends 'layout.html' %}
 
-{% block title %}Home - Wareit{% endblock %}
+{% block title %}Test-Correct / onderzoek{% endblock %}
 
 {% block content %}
 
 <body>
-    <h1>Kies een tabel voor onderzoek</h1>
+    <h2>Kies een tabel voor onderzoek</h2>
     <ul>
 
     </ul>
 </body>
 
-<table>
-    <tr>
-        {% for table in tablenames %}
-        <td><a href="/filtering/{{ table }}" class="btn btn-primary">{{ table }}</a></td>
-        {% endfor %}
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            {% for table in tablenames %}
+            <th>
+                <a href="/filtering/{{ table }}" class="">{{ table }}</a></td>
+                {% endfor %}
+            </th>
+        </tr>
+    </thead>
 </table>
 
 </html>
