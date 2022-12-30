@@ -1,11 +1,16 @@
 {% extends 'layout.html' %}
 
+<<<<<<< Updated upstream
 {% block title %}Home - auteurs{% endblock %}
+=======
+{% block title %}Test-Correct / vragen{% endblock %}
+>>>>>>> Stashed changes
 
 {% block content %}
     <h2>Dashboard</h2>
     <!-- <p>Welcome back, {{ username }}!</p> -->
 
+<<<<<<< Updated upstream
 <div>
         <a href='/home' class='btn btn-primary'>Accounts</a>
         <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
@@ -16,10 +21,41 @@
 </div>
 {% endblock %}
 {% block body %}
+=======
+<h2>Dashboard-> vragen</h2>
+
+<!-- links -->
+<div>
+    <a href='/home' class='btn btn-primary'>Accounts</a>
+    <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
+    <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
+    <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
+    <a href='/filtering' class='btn btn-primary'>Onderzoek</a>
+</div>
+
+{% if questions_page %}
+<div>
+    <h3>Ongeldige vragen kunnen worden bewerkt (<i class="fas fa-edit"></i>) of gemarkeerd worden als uitzondering (<i
+            class="fas fa-check-circle"></i>)</h3>
+    <p>Vragen kunnen om de volgende redenen ongeldig zijn:</p>
+    <ul>
+        <li>Vraag heeft ongeldig leerdoel of null.</li>
+        <li>Vraag heeft verkeerde auteur, of auteur bestaat niet.</li>
+        <li>Vraag bevat HTML of systeemcodes zoals <code>&lt;br&gt; of nbsp</code></li>
+    </ul>
+</div>
+{% endif %}
+
+<!-- {% endblock %} -->
+
+{% block body %}
+
+>>>>>>> Stashed changes
 <div class="row">
     <div class="col-md-12">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
+<<<<<<< Updated upstream
         <tr>
             {% for column in columns %}
                 <th>{{ column }}</th>
@@ -74,4 +110,41 @@
     </table>
     </div>
     </div>
+=======
+                <tr>
+                    {% for column in columns %}
+                    <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for field in row %}
+                    <td>{{ field }}</td>
+                    {% endfor %}
+                    {% if questions_page %}
+                    {% if invalid_questions_status[row[0]] %}
+
+                    <td>
+                        <a href='/home/edit_question/{{row[0]}}'><i class="fas fa-edit"></i></a>
+                        <a href='/home/set_question_as_exception/{{row[0]}}'><i class="fas fa-check-circle"></i></a>
+                        <a href="https://test-correct.nl/?vraag={{row[0]}}" target="_blank"><i
+                                class="fas fa-link"></i></a>
+                    </td>
+                    {% else %}
+                    <td>
+                        <a href="https://test-correct.nl/?vraag={{row[0]}}" target="_blank"><i
+                                class="fas fa-link"></i></a>
+                    </td>
+                    {% endif %}
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+>>>>>>> Stashed changes
 {% endblock %}

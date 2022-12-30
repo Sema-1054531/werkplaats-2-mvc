@@ -7,10 +7,10 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="shortcut icon" type="image/x-icon" href="/static/testcorrect-logo.svg" />
+	<link rel="shortcut icon" type="image/x-icon" href="/static/icon.png" />
 
 	<!-- Datatable CSS -->
-	<link href='https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+	<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
 	<!-- jQuery Library -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
@@ -43,11 +43,12 @@
 		</div>
 	</nav>
 
+	<!-- content block -->
 	<div class="content">
 		{% block content %}{% endblock %}
 	</div>
 
-	<!-- flash message -->
+	<!-- alert message -->
 	<div class='container pt-3'>
 		{% with messages=get_flashed_messages(with_categories=true) %}
 		{% if messages %}
@@ -83,6 +84,13 @@
 				"iDisplayLength": 10
 			}
 			);
+		});
+
+		// hide alert
+		$(document).ready(function () {
+			setTimeout(function () {
+				$('.alert').fadeOut('slow');
+			}, 2000);
 		});
 
 	</script>
