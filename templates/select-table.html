@@ -1,0 +1,27 @@
+<form method="POST" action="/display-table">
+    <label for="table">Select a table:</label>
+    <select name="table" id="table">
+        {% for table in tables %}
+        <option value="{{ table[0] }}">{{ table[0] }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+</form>
+
+{% if table %}
+<table>
+    <tr>
+        {% for column in columns %}
+        <th>{{ column[0] }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in rows %}
+    <tr>
+        {% for value in row %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<a href="/download-csv?table={{ table }}">Download CSV</a>
+{% endif %}
