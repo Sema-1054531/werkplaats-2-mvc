@@ -1,24 +1,34 @@
-<html>
+{% extends 'layout.html' %}
 
-<body>
-    <p>Onderzoek naar kolom {{ column }} in {{ table }}</p>
-    <p>De volgende waardes en IDs zijn niet converteerbaar naar {{ datatype }}</p>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Waarde</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for unconverted in values %}
-            <tr>
-                <td>{{ unconverted[0] }}</td>
-                <td>{{ unconverted[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
+{% block title %}Test-Correct / onderzoek{% endblock %}
 
-</html>
+{% block content %}
+
+<p>Onderzoek naar kolom <b>{{ column }}</b> in <b>{{ table }}</b></p>
+<p>De volgende waardes en IDs zijn niet converteerbaar naar {{ datatype }}</p>
+<div class="row">
+    <div class="col-md-12">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th>Waarde</th>
+                    <th>edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for unconverted in values %}
+                <tr>
+                    <th scope="row">{{ unconverted[0] }}</th>
+                    <td>{{ unconverted[1] }}</td>
+                    <td width="">
+                        <a href="/edit/{{ unconverted[0] }}" class="fas fa-pen"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
