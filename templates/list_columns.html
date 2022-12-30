@@ -1,12 +1,25 @@
-<html>
+{% extends 'layout.html' %}
+
+{% block title %}Test-Correct / onderzoek{% endblock %}
+
+{% block content %}
 
 <body>
-    <h1>Selecteer de kolom die u wilt onderzoeken in {{ table }}</h1>
+    <h2>Selecteer de kolom die u wilt onderzoeken in {{ table }}</h2>
     <ul>
-        {% for column_name in columns %}
-        <li><a href="/filtering/{{ table }}/{{ column_name }}">{{ column_name }}</a></li>
-        {% endfor %}
+
     </ul>
 </body>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            {% for column_name in columns %}
+            <th>
+                <a href="/filtering/{{ table }}/{{ column_name }}">{{ column_name }}</a>
+            </th>
+            {% endfor %}
+        </tr>
+    </thead>
+</table>
 
-</html>
+{% endblock %}
