@@ -111,16 +111,15 @@ def find_authors():
 
 # edit vragen
 @app.route('/home/vragen')
-@app.route('/home/vragen/<int:start>/<int:eind>')
-def vragen(start=0, eind=10):
+def vragen():
     cursor = connection.cursor()
     cursor.execute(f"SELECT * FROM vragen")
     columns = [columns[0] for columns in cursor.description]
     rows = cursor.fetchall()
-    rows = rows[start:eind]
+    rows = rows
     return render_template('vragen.html', rows=rows, columns=columns)
 
-# save vragen
+# save / update vragen
 @app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
 def opslaan(question_id):
     question_content = request.form["vraag"]

@@ -12,13 +12,13 @@
     <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
     <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
 
-        {% set nextpage=pageend + 10 %}
+        {% set nextpage=page-end + 10 %}
         {% set previouspage=pagestart - 10 %}
-        Resultaten van {{  pagestart }} tot {{ pageend }}
+        Resultaten van {{  pagestart }} tot {{ page-end }}
         {%  if previouspage >= 0 %}
         <a href='/home/vragen/{{ previouspage }}/{{ pagestart }}' class='btn btn-outline-primary'>Vorige pagina</a>
         {% endif %}
-        <a href='/home/vragen/{{ pageend }}/{{ nextpage }}' class='btn btn-outline-primary'>Volgende pagina</a>
+        <a href='/home/vragen/{{ page-end }}/{{ nextpage }}' class='btn btn-outline-primary'>Volgende pagina</a>
 
 
     <table class='table table-bordered'>
