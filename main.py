@@ -16,6 +16,9 @@ app.secret_key = 'your secret key'
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
 
+# The list of roles
+roles_list = ['Admin', 'Editor']
+
 # login page, we need to use both GET and POST requests
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
@@ -41,10 +44,12 @@ def login():
                 session['loggedin'] == True
                 session['id'] == account['id']
                 session['username'] == account['username']
+                session['role'] == account['role']
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
+            # session['role'] = account['role']
             # Redirect to home page
             return redirect(url_for('home'))
         else:
@@ -155,8 +160,9 @@ def edit_question(id):
         author = request.form['author']
         cursor.execute('''UPDATE vragen SET vraag = ?, leerdoel = ?, auteur = ? WHERE id = ?''', (question, learning_objective, author, id))
         connection.commit()
-        flash('Vraag updated','success')
-        return redirect(url_for('questions'))
+        flash(f'Vraag "{id}" is bijgewerkt','success')
+        return redirect(url_for('questions', selected_question=id))
+        
 
 # set vraag als exceptie
 @app.route('/home/set_question_as_exception/<int:id>')
@@ -171,7 +177,7 @@ def set_question_as_exception(id):
     if not exception_question and question:
         cursor.execute('''INSERT INTO exceptie_vraag (vraag_id) values(?)''', (id,))
         connection.commit()
-        flash('Exceptie updated','success')
+        flash(f'Exceptie "{id}" is bijgewerkt','success')
     return redirect(url_for('questions'))
 
 # add user
@@ -187,7 +193,7 @@ def add_user():
         cursor = connection.cursor()
         cursor.execute('INSERT INTO accounts (username, password, email) values (?,?,?)',(username, password, email))
         connection.commit()
-        flash('Gebruiker Added','success')
+        flash('Gebruiker is bijgewerkt','success')
         return redirect(url_for("add_user"))
     return render_template("add_user.html")
 
@@ -202,7 +208,7 @@ def edit_user(id):
         cursor = connection.cursor()
         cursor.execute("update accounts set username=?,password=?,email=? where id=?",(username,password,email,id))
         connection.commit()
-        flash('Gebruiker Updated','success')
+        flash('Gebruiker is bijgewerkt','success')
         return redirect(url_for("home"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -224,7 +230,7 @@ def edit_auteurs(id):
         cursor = connection.cursor()
         cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
         connection.commit()
-        flash('Auteurs Updated','success')
+        flash('Auteurs is bijgewerkt','success')
         return redirect(url_for("auteurs"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -242,7 +248,7 @@ def edit_leerdoelen(id):
         cursor = connection.cursor()
         cursor.execute("update leerdoelen set leerdoel=? where id=?",(leerdoel,id))
         connection.commit()
-        flash('Leerdoelen Updated','success')
+        flash('Leerdoelen is bijgewerkt','success')
         return redirect(url_for("leerdoelen"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -258,7 +264,7 @@ def delete_user(id):
     cursor = connection.cursor()
     cursor.execute("delete from accounts where id=?",(id,))
     connection.commit()
-    flash('User Deleted','warning')
+    flash('User is bijgewerkt','warning')
     return redirect(url_for("home"))
 
 # profile page only accessible for loggedin users
@@ -277,16 +283,6 @@ def profile():
         # role=session['role'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
-
-@app.route('/display')
-def display_rows():
-  connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-  cursor = connection.cursor()
-  # Select rows where column_name is Null
-  cursor.execute("SELECT * FROM vragen WHERE leerdoel IS Null")
-  rows = cursor.fetchall()
-  connection.close()
-  return render_template('display.html', rows=rows)
 
 # get tables
 @app.route('/filtering/')
@@ -307,6 +303,29 @@ def filter_table_on_column(table_name, column_name):
     values = question_model.get_unconvertable_values(table_name, column_name, datatype)
     return render_template("list_unconvertable.html", values=values, table=table_name, column=column_name, datatype=datatype)
 
+# Edit table value function
+@app.route('/edit/<table_name>/<column_name>/<id>', methods=['GET', 'POST'])
+def edit_table_value(table_name, column_name, id):
+    if request.method == 'POST':
+        # Get form data
+        new_value = request.form['new_value']
+
+        # Update value in database
+        cursor = connection.cursor()
+        cursor.execute("UPDATE {} SET {} = ? WHERE id = ?".format(table_name, column_name), (new_value, id))
+        connection.commit()
+
+        # Redirect to filtered table page
+        return redirect(url_for('filter_table_on_column', table_name=table_name, column_name=column_name))
+
+    # Get current value from database
+    cursor = connection.cursor()
+    cursor.execute("SELECT {} FROM {} WHERE id = ?".format(column_name, table_name), (id,))
+    current_value = cursor.fetchone()[0]
+
+    # Render edit form template
+    return render_template('edit_form.html', table=table_name, column=column_name, id=id, current_value=current_value)
+
 # select-table
 @app.route('/select-table')
 def select_table():
@@ -323,16 +342,20 @@ def display_table():
     # Get the selected table
     table = request.form['table']
     cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
-    rows = cursor.fetchall()
-    cursor.execute(f"PRAGMA table_info( {table} )")
-    columns = cursor.fetchall()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-    tables = cursor.fetchall()
-    cursor.close()
-
+    try:
+        cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
+        rows = cursor.fetchall()
+        cursor.execute(f"PRAGMA table_info( {table} )")
+        columns = cursor.fetchall()
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
+        cursor.close()
+    except sqlite3.Error as e:
+        # Return an error message if the table does not exist
+        return render_template('error.html', message=f"Error: {e}")
     return render_template('select-table.html', tables=tables, table=table, rows=rows, columns=columns)
 
+# csv
 @app.route('/download-csv/<table>')
 def download_csv(table):
     cursor = connection.cursor()
@@ -364,6 +387,7 @@ def logout():
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
+   session.pop('role', None)
    # redirect to login page
    return redirect(url_for('login'))
 
