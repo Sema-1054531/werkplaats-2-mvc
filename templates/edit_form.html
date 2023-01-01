@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}Edit value{% endblock %}
+
+{% block content %}
+
+<h3>Edit value in column <b>{{ column }}</b> in <b>{{ table }}</b> with ID <b>{{ id }}</b></h3>
+
+<form method="post">
+  <div class="form-group">
+    <label for="new_value">New value</label>
+    <input type="text" class="form-control" id="new_value" name="new_value" value="{{ current_value }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
