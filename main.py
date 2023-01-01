@@ -354,6 +354,8 @@ def display_table():
         # Return an error message if the table does not exist
         return render_template('error.html', message=f"Error: {e}")
     return render_template('select-table.html', tables=tables, table=table, rows=rows, columns=columns)
+
+# Cookies
 @app.route('/')
 def index():
     resp = make_response(render_template('index.html'))
