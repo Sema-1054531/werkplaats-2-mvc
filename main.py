@@ -116,6 +116,23 @@ def questions():
     column.append('action')
     return render_template('vragen.html', rows=rows, columns=column, invalid_questions_status=invalid_questions_status, questions_page=True)
 
+@app.route("/home/ongeldigleerdoel")
+def ongeldigleerdoel():
+    cursor = connection.cursor()
+    column = cursor.execute('''SELECT * FROM vragen WHERE leerdoel NOT IN (SELECT id FROM leerdoelen)''')
+    rows = cursor.fetchall()
+    column = [column[0] for column in column.description]
+    return render_template('ongeldigleerdoel.html', rows=rows, columns=column)
+
+@app.route("/home/systeemcodes")
+def systeemcodes():
+    cursor = connection.cursor()
+    column = cursor.execute(f"SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%'")
+    rows = cursor.fetchall()
+    column = [column[0] for column in column.description]
+    return render_template('systeemcodes.html', rows=rows, columns=column)
+
+
 # deze functie return de lijst met ids van ongeldige vragen
 def find_invalid_questions():
     cursor = connection.cursor()
