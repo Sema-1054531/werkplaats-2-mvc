@@ -4,14 +4,26 @@
 
 {% block content %}
 
-<h3>Edit value in column <b>{{ column }}</b> in <b>{{ table }}</b> with ID <b>{{ id }}</b></h3>
+<p>Edit value in column <b>{{ column }}</b> in <b>{{ table }}</b> with ID <b>{{ id }}</b></p>
 
-<form method="post">
-  <div class="form-group">
-    <label for="new_value">New value</label>
-    <input type="text" class="form-control" id="new_value" name="new_value" value="{{ current_value }}" required>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-7 p-5 rounded border">
+      <h3 class="text-center">Bewerk waarde</h3>
+      <hr>
+      <div class="form-group mb-3">
+        <form method="post">
+          <div class="form-group">
+            <!-- <label for="new_value">New value</label> -->
+            <input type="text" class="form-control" id="new_value" name="new_value" value="{{ current_value }}"
+              required>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a class="btn btn-primary" href="/filtering/{{ table }}/{{ column }}" role="button">Return to
+            table</a>
+        </form>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
+</div>
 {% endblock %}
