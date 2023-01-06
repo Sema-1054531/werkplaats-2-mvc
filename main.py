@@ -101,10 +101,33 @@ def auteurs():
 @app.route('/home/vragen')
 def questions():
     if 'loggedin'  not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('login'))    
     cursor = connection.cursor()
-    column = cursor.execute('''SELECT * FROM vragen''')
-    rows = cursor.fetchall()
+    # Initialize an empty list to store the query results
+    rows = []
+    # Initialize a default value for the dropdown menu
+    selected_option = 'all'
+    # Check if the dropdown menu has been submitted
+    if request.args.get('filter'):
+        # Get the selected option from the dropdown menu
+        selected_option = request.args.get('filter')
+    # If the selected option is 'NULL', only retrieve rows where the leerdoel is NULL
+    if selected_option == 'NULL':
+        column = cursor.execute('''SELECT * FROM vragen WHERE leerdoel IS NULL''')
+        rows = cursor.fetchall()
+    # If the selected option is 'br', retrieve rows where the vraag column contains <br> or &nbsp;
+    elif selected_option == 'br':
+        column = cursor.execute('''SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%' ''')
+        rows = cursor.fetchall()
+    # If the selected option is 'invalid_leerdoel', retrieve rows where the leerdoel is not in the leerdoelen table
+    elif selected_option == 'invalid_leerdoel':
+        column = cursor.execute('''SELECT * FROM vragen WHERE leerdoel NOT IN (SELECT id FROM leerdoelen)''')
+        rows = cursor.fetchall()
+    # If the selected option is 'all', retrieve all rows
+    elif selected_option == 'all':
+        column = cursor.execute('''SELECT * FROM vragen''')
+        rows = cursor.fetchall()
+    # Invalid questions
     invalid_questions_ids = find_invalid_questions()
     invalid_questions_status = {}
     for row in rows:
@@ -114,7 +137,7 @@ def questions():
             invalid_questions_status[row[0]] = False
     column = [column[0] for column in column.description]
     column.append('action')
-    return render_template('vragen.html', rows=rows, columns=column, invalid_questions_status=invalid_questions_status, questions_page=True)
+    return render_template('vragen.html', rows=rows, columns=column, invalid_questions_status=invalid_questions_status,  selected_option=selected_option, questions_page=True)
 
 @app.route("/home/ongeldigleerdoel")
 def ongeldigleerdoel():
@@ -124,6 +147,7 @@ def ongeldigleerdoel():
     column = [column[0] for column in column.description]
     return render_template('ongeldigleerdoel.html', rows=rows, columns=column)
 
+
 @app.route("/home/systeemcodes")
 def systeemcodes():
     cursor = connection.cursor()
@@ -131,7 +155,6 @@ def systeemcodes():
     rows = cursor.fetchall()
     column = [column[0] for column in column.description]
     return render_template('systeemcodes.html', rows=rows, columns=column)
-
 
 # deze functie return de lijst met ids van ongeldige vragen
 def find_invalid_questions():
@@ -180,7 +203,6 @@ def edit_question(id):
         flash(f'Vraag "{id}" is bijgewerkt','success')
         return redirect(url_for('questions', selected_question=id))
         
-
 # set vraag als exceptie
 @app.route('/home/set_question_as_exception/<int:id>')
 def set_question_as_exception(id):
@@ -225,7 +247,7 @@ def edit_user(id):
         cursor = connection.cursor()
         cursor.execute("update accounts set username=?,password=?,email=? where id=?",(username,password,email,id))
         connection.commit()
-        flash('Gebruiker is bijgewerkt','success')
+        flash(f'Gebruiker "{username}" is bijgewerkt','success')
         return redirect(url_for("home"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -247,7 +269,7 @@ def edit_auteurs(id):
         cursor = connection.cursor()
         cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
         connection.commit()
-        flash('Auteurs is bijgewerkt','success')
+        flash(f'Auteur "{voornaam}" is bijgewerkt','success')
         return redirect(url_for("auteurs"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -265,7 +287,7 @@ def edit_leerdoelen(id):
         cursor = connection.cursor()
         cursor.execute("update leerdoelen set leerdoel=? where id=?",(leerdoel,id))
         connection.commit()
-        flash('Leerdoelen is bijgewerkt','success')
+        flash(f'Leerdoel "{leerdoel}" is bijgewerkt','success')
         return redirect(url_for("leerdoelen"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -331,7 +353,7 @@ def edit_table_value(table_name, column_name, id):
         cursor = connection.cursor()
         cursor.execute("UPDATE {} SET {} = ? WHERE id = ?".format(table_name, column_name), (new_value, id))
         connection.commit()
-
+        flash(f'Waarde "{id}" is bijgewerkt','success')
         # Redirect to filtered table page
         return redirect(url_for('filter_table_on_column', table_name=table_name, column_name=column_name))
 
@@ -343,41 +365,6 @@ def edit_table_value(table_name, column_name, id):
     # Render edit form template
     return render_template('edit_form.html', table=table_name, column=column_name, id=id, current_value=current_value)
 
-# select-table
-@app.route('/select-table')
-def select_table():
-    cursor = connection.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-    tables = cursor.fetchall()
-    cursor.close()
-
-    return render_template('select-table.html', tables=tables)
-
-# display-table
-@app.route('/display-table', methods=['POST'])
-def display_table():
-    # Get the selected table
-    table = request.form['table']
-    cursor = connection.cursor()
-    try:
-        cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
-        rows = cursor.fetchall()
-        cursor.execute(f"PRAGMA table_info( {table} )")
-        columns = cursor.fetchall()
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-        tables = cursor.fetchall()
-        cursor.close()
-    except sqlite3.Error as e:
-        # Return an error message if the table does not exist
-        return render_template('error.html', message=f"Error: {e}")
-    return render_template('select-table.html', tables=tables, table=table, rows=rows, columns=columns)
-
-# Cookies
-@app.route('/')
-def index():
-    resp = make_response(render_template('index.html'))
-    resp.set_cookie('somecookiename', 'I am cookie')
-    return resp
 # csv
 @app.route('/download-csv/<table>')
 def download_csv(table):
@@ -403,6 +390,25 @@ def download_csv(table):
     response.headers["Content-type"] = "text/csv"
     return response
 
+# edit vragen
+@app.route('/home/vragen')
+@app.route('/home/vragen/<int:start>/<int:eind>')
+def vragen():
+    cursor = connection.cursor()
+    cursor.execute(f"SELECT * FROM vragen")
+    columns = [columns[0] for columns in cursor.description]
+    rows = cursor.fetchall()
+    return render_template('vragen.html', rows=rows, columns=columns)
+
+# modal vragen
+@app.route('/home/vragen/opslaan/<question_id>', methods=['POST'])
+def opslaan(question_id):
+    question_content = request.form["vraag"]
+    cursor = connection.cursor()
+    cursor.execute("UPDATE vragen SET vraag = '" + question_content + "' where id = " + question_id)
+    connection.commit()
+    return redirect(url_for("vragen"))
+
 # logout page
 @app.route('/logout')
 def logout():
@@ -419,21 +425,3 @@ if __name__ == '__main__':
     app.run(debug=True)
     app.run()
 
-# # edit vragen
-# @app.route('/home/vragen_update')
-# @app.route('/home/vragen_update/<int:start>/<int:eind>')
-# def vragen():
-#     cursor = connection.cursor()
-#     cursor.execute(f"SELECT * FROM vragen")
-#     columns = [columns[0] for columns in cursor.description]
-#     rows = cursor.fetchall()
-#     return render_template('vragen_update.html', rows=rows, columns=columns)
-
-# # modal vragen
-# @app.route('/home/vragen_update/opslaan/<question_id>', methods=['POST'])
-# def opslaan(question_id):
-#     question_content = request.form["vraag"]
-#     cursor = connection.cursor()
-#     cursor.execute("UPDATE vragen SET vraag = '" + question_content + "' where id = " + question_id)
-#     connection.commit()
-#     return redirect(url_for("vragen_update"))
