@@ -45,20 +45,20 @@ def login():
                 session['id'] == account['id']
                 session['username'] == account['username']
                 session['role'] == account['role']
-                if session['role'] == 'admin':
-                    return redirect(url_for('admin_home'))
-                else:
-                    return redirect(url_for('home'))
 
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
 
             session['username'] = account['username']
-            # session['role'] = account['role']
-            # Redirect to home page
-            return redirect(url_for('home'))
+            session['role'] = account['role']
+            if session['role'] == 'admin':
+                return redirect(url_for('admin_home'))
+            else:
+                return redirect(url_for('home'))
         else:
+            # Redirect to home page
+
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
     # Show the login form with message (if any)
