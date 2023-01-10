@@ -359,8 +359,12 @@ def display_table():
 @app.route('/')
 def index():
     resp = make_response(render_template('index.html'))
-    resp.set_cookie('somecookiename', 'I am cookie')
+    resp.set_cookie('cookie', 'I am cookie')
     return resp
+
+@app.route('/get-cookie/')
+def get_cookie():
+    username = request.cookies.get('cookien')
 # csv
 @app.route('/download-csv/<table>')
 def download_csv(table):
