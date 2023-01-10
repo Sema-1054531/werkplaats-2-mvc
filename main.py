@@ -45,9 +45,15 @@ def login():
                 session['id'] == account['id']
                 session['username'] == account['username']
                 session['role'] == account['role']
+                if session['role'] == 'admin':
+                    return redirect(url_for('admin_home'))
+                else:
+                    return redirect(url_for('home'))
+
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
+
             session['username'] = account['username']
             # session['role'] = account['role']
             # Redirect to home page
@@ -57,6 +63,12 @@ def login():
             msg = 'Incorrect username/password!'
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
+@app.route('/admin_home')
+def admin_home():
+    # print(session)
+    if session['role'] != 'admin':
+        return redirect(url_for('home'))
+    return render_template('admin_home.html')
 
 # home page only accessible for loggedin users
 @app.route('/home')
