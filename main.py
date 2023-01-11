@@ -16,9 +16,6 @@ app.secret_key = 'your secret key'
 # This command creates the "<application directory>/databases/testcorrect_vragen.db" path
 connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
 
-# The list of roles
-roles_list = ['Admin', 'Editor']
-
 # login page, we need to use both GET and POST requests
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
@@ -41,23 +38,38 @@ def login():
         if account:
             # Accessing columns by name instead of by index
             for account in cursor:
-                session['loggedin'] == True
-                session['id'] == account['id']
-                session['username'] == account['username']
-                session['role'] == account['role']
+                session['loggedin'] = True
+                session['id'] = account['id']
+                session['username'] = account['username']
+                session['role'] = account['role']
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
-            # session['role'] = account['role']
-            # Redirect to home page
-            return redirect(url_for('home'))
+            session['role'] = account['role']
+            # Redirect to home page for 'editor' or 'admin'
+            if session['role'] == 'admin':
+                return redirect(url_for('admin_home'))
+            else:
+                return redirect(url_for('home'))
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
 
+# admin page to manage users 
+@app.route('/admin_home')
+def admin_home():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM accounts')
+    data = cursor.fetchall()
+    if session['role'] == 'admin':
+         return render_template('admin_home.html', datas=data, username=session['username'])
+    return redirect(url_for('home'))
+   
 # home page only accessible for loggedin users
 @app.route('/home')
 def home():
@@ -69,14 +81,14 @@ def home():
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show them the home page
-        return render_template('home.html', datas=data,username=session['username'])
+         return render_template('home.html', datas=data, username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
 
 # get leerdoelen list
 @app.route('/home/leerdoelen')
 def leerdoelen():
-    if 'loggedin'  not in session:
+    if 'loggedin' not in session:
         return redirect(url_for('login'))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
@@ -85,22 +97,32 @@ def leerdoelen():
     data = cursor.fetchall()
     return render_template("leerdoelen.html", leerdoelen=data)
 
-# get auteurs list
-@app.route('/home/auteurs')
+# get auteurs list with IN BETWEEN function
+@app.route('/home/auteurs', methods=['GET', 'POST'])
 def auteurs():
-    if 'loggedin'  not in session:
+    if 'loggedin' not in session:
         return redirect(url_for('login'))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM auteurs')
+    if request.method == 'POST':
+        dob = request.form['dob']
+        if dob == "show-all":
+            cursor.execute('SELECT * FROM auteurs')
+        elif dob == "1990-1999":
+            cursor.execute('SELECT * FROM auteurs WHERE geboortejaar >= 1990 AND geboortejaar <= date("now")')
+        else:
+            cursor.execute('SELECT * FROM auteurs')
+    else:
+        cursor.execute('SELECT * FROM auteurs')
     data = cursor.fetchall()
+    
     return render_template("auteurs.html", auteurs=data)
 
 # zoek de lijst van vragen
 @app.route('/home/vragen')
 def questions():
-    if 'loggedin'  not in session:
+    if 'loggedin' not in session:
         return redirect(url_for('login'))    
     cursor = connection.cursor()
     # Initialize an empty list to store the query results
@@ -137,6 +159,19 @@ def questions():
             invalid_questions_status[row[0]] = False
     column = [column[0] for column in column.description]
     column.append('action')
+    # Check if the download button has been clicked
+    if request.args.get('download'):
+        # Create a CSV file in memory
+        si = StringIO()
+        cw = csv.writer(si)
+        # Write the column names and rows to the CSV file
+        cw.writerow(column)
+        cw.writerows(rows)
+        # Set the response headers to indicate that the response is a CSV file
+        response = make_response(si.getvalue())
+        response.headers["Content-Disposition"] = "attachment; filename=vragen.csv"
+        response.headers["Content-type"] = "text/csv"
+        return response
     return render_template('vragen.html', rows=rows, columns=column, invalid_questions_status=invalid_questions_status,  selected_option=selected_option, questions_page=True)
 
 @app.route("/home/ongeldigleerdoel")
@@ -146,7 +181,6 @@ def ongeldigleerdoel():
     rows = cursor.fetchall()
     column = [column[0] for column in column.description]
     return render_template('ongeldigleerdoel.html', rows=rows, columns=column)
-
 
 @app.route("/home/systeemcodes")
 def systeemcodes():
@@ -364,31 +398,6 @@ def edit_table_value(table_name, column_name, id):
 
     # Render edit form template
     return render_template('edit_form.html', table=table_name, column=column_name, id=id, current_value=current_value)
-
-# csv
-@app.route('/download-csv/<table>')
-def download_csv(table):
-    cursor = connection.cursor()
-    cursor.execute(f"SELECT * FROM {table} WHERE leerdoel IS NULL")
-    rows = cursor.fetchall()
-    cursor.execute(f"PRAGMA table_info( {table} )")
-    columns = cursor.fetchall()
-    cursor.close()
-
-    # Generate CSV data from the table data
-    csv_data = StringIO()
-    csv_writer = csv.writer(csv_data, quotechar='"')
-    csv_writer.writerow([column[1] for column in columns])
-    csv_writer.writerows(rows)
-    csv_data.seek(0)
-    csv_str = csv_data.read()
-
-    # Set the response headers to indicate that the file is a CSV file
-    # and prompt the browser to download it
-    response = make_response(csv_str)
-    response.headers["Content-Disposition"] = f"attachment; filename={table}.csv"
-    response.headers["Content-type"] = "text/csv"
-    return response
 
 # edit vragen
 @app.route('/home/vragen')
