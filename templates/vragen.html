@@ -39,10 +39,13 @@
     <select name="filter" onchange="this.form.submit()">
         <option value="all" {% if selected_option=='all' %}selected{% endif %}>All</option>
         <option value="NULL" {% if selected_option=='NULL' %}selected{% endif %}>NULL</option>
-        <option value="br" {% if selected_option=='br' %}selected{% endif %}>Systeemcodes</option>
-        <option value="invalid_leerdoel" {% if selected_option=='invalid_leerdoel' %}selected{% endif %}>Ongeldige
+        <option value="br" {% if selected_option=='br' %}selected{% endif %}>Systeemcodes
+        </option>
+        <option value="invalid_leerdoel" {% if selected_option=='invalid_leerdoel' %}selected{% endif %}>
+            Ongeldige
             leerdoelen</option>
     </select>
+    <button type="submit" name="download" value="true" class="btn btn-success">Download CSV</button>
 </form>
 
 <div class="row">
