@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block title %}Test-Correct / Admin Home{% endblock %}
+
+{% block content %}
+
+<h2>Admin Home</h2>
+    <p>You are logged in as: {{ session['username'] }}</p>
+    <p>Your role is: {{ session['role'] }}</p>
+
+<div>
+    <a href='/home' class='btn btn-primary'>Accounts</a>
+    <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
+    <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
+    <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
+    <a href='/filtering' class='btn btn-primary'>Onderzoek</a>
+</div>
+<!-- {% endblock %} -->
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            {% if message %}
+            <div class="alert alert-danger">{{ message }}</div>
+            <div class='alert alert-{{category}}'>{{message}}</div>
+            {% endif %}
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>voornaam</td>
+                    <td>achternaam</td>
+                    <td>geboortejaar</td>
+                    <td>medewerker</td>
+                    <td>met_pensioen</td>
+                    <td>edit</td>
+                    <td>delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in auteurs %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{row.voornaam}}</td>
+                    <td>{{row.achternaam}}</td>
+                    <td>{{row.geboortejaar}}</td>
+                    <td>{{row.medewerker}}</td>
+                    <td>{{row.met_pensioen}}</td>
+                    <td>
+                        <a href="/edit_auteurs/{{row.id}}" class="fas fa-pen"></a>
+                    </td>
+                    <td>
+                        <a href="/delete_auteurs/{{row.id}}" class="fas fa-trash"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
