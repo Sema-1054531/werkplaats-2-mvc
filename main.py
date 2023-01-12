@@ -45,7 +45,6 @@ def login():
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
-
             session['username'] = account['username']
             session['role'] = account['role']
             # Redirect to home page for 'editor' or 'admin'
@@ -54,30 +53,18 @@ def login():
             else:
                 return redirect(url_for('home'))
         else:
-            # Redirect to home page
-
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
+
+# admin home page
 @app.route('/admin_home')
 def admin_home():
     # print(session)
     if session['role'] != 'admin':
         return redirect(url_for('home'))
     return render_template('admin_home.html')
-
-# admin page to manage users 
-@app.route('/admin_home')
-def admin_home():
-    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM accounts')
-    data = cursor.fetchall()
-    if session['role'] == 'admin':
-         return render_template('admin_home.html', datas=data, username=session['username'])
-    return redirect(url_for('home'))
    
 # home page only accessible for loggedin users
 @app.route('/home')
