@@ -61,10 +61,14 @@ def login():
 # admin home page
 @app.route('/admin_home')
 def admin_home():
-    # print(session)
-    if session['role'] != 'admin':
-        return redirect(url_for('home'))
-    return render_template('admin_home.html')
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM accounts')
+    data = cursor.fetchall()
+    if session['role'] == 'admin':
+         return render_template('admin_home.html', datas=data, username=session['username'])
+    return redirect(url_for("admin_home"))
    
 # home page only accessible for loggedin users
 @app.route('/home')
@@ -265,6 +269,7 @@ def add_user():
         flash('Gebruiker is bijgewerkt','success')
         return redirect(url_for("add_user"))
     return render_template("add_user.html")
+
 
 # edit user
 @app.route("/edit_user/<string:id>",methods=['POST','GET'])
