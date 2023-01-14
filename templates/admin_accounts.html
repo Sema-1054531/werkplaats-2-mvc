@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block title %}Test-Correct / Admin Home{% endblock %}
+
+{% block content %}
+
+<!-- <h2>Admin Home</h2>
+<p>You are logged in as: {{ session['username'] }}</p>
+<p>Your role is: {{ session['role'] }}</p> -->
+
+<h2>Dashboard-> accounts</h2>
+
+<div>
+    <a href='/admin_home' class='btn btn-primary'>Dashboard</a>
+    <a href='/admin_home/accounts' class='btn btn-primary'>Manage Accounts</a>
+</div>
+
+<!-- {% endblock %} -->
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>username</td>
+                    <td>password</td>
+                    <td>email</td>
+                    <td>edit</td>
+                    <td>delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in datas %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{row.username}}</td>
+                    <td>{{row.password}}</td>
+                    <td>{{row.email}}</td>
+                    <td width="">
+                        <a href="/edit_user/{{row.id}}" class="fas fa-pen"></a>
+                    </td>
+                    <td>
+                        <a href="/delete_user/{{row.id}}" class="fas fa-trash"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>
+{% endblock %}
