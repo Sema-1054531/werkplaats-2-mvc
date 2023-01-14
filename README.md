@@ -4,13 +4,7 @@ De applicatie is geschreven in Python en daarop de web-framework Flask. Voor de 
 
 Om de redacteurs te helpen met verbeteren van de kwaliteit van de inhoud wil men een tool maken. Dit tool, eenwebapplicatie, zou aan de hand van bekende patronen vraag items moeten tonen waarzaken aan verbeterd moeten worden. Een soort “vragen hospitaal”.
 
-Voorbeelden
-
-Pagina 1
-
-Pagina 2
-
-etc..
+Voorbeeld
 
 # Vereisten
 
@@ -30,8 +24,8 @@ De applicatie zou normaliter direct op de database in prikken, maar die is heel 
 - [x] Maak een hyperlink van een vraag die als ID op het scherm ?vraag={{ id }}”. te zien krijgt
 - [x] Gebruikers met "beheer permissies" kunnen de gebruikersnamen en wachtwoorden instellen (<b>should-have</b>)
 - [-] Sommige kolommen hebben lege waardes waar dat niet mag, en ook waardes die leeg moeten zijn
-- [-] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
-- [-] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
+- [x] Sommige kolommen moeten converteerbaar zijn naar een datatype, maar hebben waardes waarbij dat niet kan
+- [x] CSV-export van alle probleemgevallen dus kies een tabel, column, en dan alle cases met het "<b>ID veld</b>"
 
 
 # werkplaats2_starter
@@ -72,4 +66,4 @@ python main.py
 
 Nadir, Martijn, Romius, Thijs, Sema
 
-Overige links hieronder license, copyright etc.
+
