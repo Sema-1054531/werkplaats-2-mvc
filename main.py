@@ -312,7 +312,7 @@ def edit_auteurs(id):
         cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
         connection.commit()
         flash(f'Auteur "{voornaam}" is bijgewerkt','success')
-        return redirect(url_for("auteurs"))
+        return redirect(url_for("home"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
