@@ -58,50 +58,40 @@ def login():
     # Show the login form with message (if any)
     return render_template('index.html', msg=msg)
 
-# admin home page
+# only accessible for admin users
 @app.route('/admin_home')
 def admin_home():
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM accounts")
+    result = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM auteurs")
+    auteurs = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM leerdoelen")
+    leerdoelen = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(*) FROM vragen")
+    vragen = cursor.fetchone()[0]
+    connection.close()
+    # return result
+    if session['role'] == 'admin':
+         return render_template('admin_home.html', leerdoelen=leerdoelen,auteurs=auteurs,vragen=vragen, result=result, username=session['username'])
+    return redirect(url_for('login'))
+   
+# admin page to manage accounts
+@app.route('/admin_home/accounts')
+def admin_accounts():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM accounts')
     data = cursor.fetchall()
     if session['role'] == 'admin':
-         return render_template('admin_home.html', datas=data, username=session['username'])
-    return redirect(url_for("admin_home"))
-   
-# home page only accessible for loggedin users
-@app.route('/home')
-def home():
-    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM accounts')
-    data = cursor.fetchall()
-    # Check if user is loggedin
-    if 'loggedin' in session:
-        # User is loggedin show them the home page
-         return render_template('home.html', datas=data, username=session['username'])
-    # User is not loggedin redirect to login page
+         return render_template('admin_accounts.html', datas=data, username=session['username'])
     return redirect(url_for('login'))
 
-# get leerdoelen list
-@app.route('/home/leerdoelen')
-def leerdoelen():
-    if 'loggedin' not in session:
-        return redirect(url_for('login'))
-    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
-    connection.row_factory = sqlite3.Row
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM leerdoelen')
-    data = cursor.fetchall()
-    return render_template("leerdoelen.html", leerdoelen=data)
-
-# get auteurs list with IN BETWEEN function
-@app.route('/home/auteurs', methods=['GET', 'POST'])
-def auteurs():
-    if 'loggedin' not in session:
-        return redirect(url_for('login'))
+# home page only accessible for loggedin users
+@app.route('/home', methods=['GET', 'POST'])
+def home():
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
@@ -116,8 +106,25 @@ def auteurs():
     else:
         cursor.execute('SELECT * FROM auteurs')
     data = cursor.fetchall()
-    
-    return render_template("auteurs.html", auteurs=data)
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        # User is loggedin show them the home page
+         return render_template('home.html', auteurs=data, username=session['username'])
+    # User is not loggedin redirect to login page
+ 
+    return redirect(url_for('login'))
+
+# get leerdoelen list
+@app.route('/home/leerdoelen')
+def leerdoelen():
+    if 'loggedin' not in session:
+        return redirect(url_for('login'))
+    connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM leerdoelen')
+    data = cursor.fetchall()
+    return render_template("leerdoelen.html", leerdoelen=data)
 
 # zoek de lijst van vragen
 @app.route('/home/vragen')
@@ -299,7 +306,7 @@ def edit_user(id):
         cursor.execute("update accounts set username=?,password=?,email=? where id=?",(username,password,email,id))
         connection.commit()
         flash(f'Gebruiker "{username}" is bijgewerkt','success')
-        return redirect(url_for("home"))
+        return redirect(url_for("admin_accounts"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
@@ -321,7 +328,7 @@ def edit_auteurs(id):
         cursor.execute("update auteurs set voornaam=?,achternaam=?,geboortejaar=?,medewerker=?,met_pensioen=? where id=?",(voornaam,achternaam,geboortejaar,medewerker,met_pensioen,id))
         connection.commit()
         flash(f'Auteur "{voornaam}" is bijgewerkt','success')
-        return redirect(url_for("auteurs"))
+        return redirect(url_for("home"))
     connection = sqlite3.connect('./databases/testcorrect_vragen.db', check_same_thread = False)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
