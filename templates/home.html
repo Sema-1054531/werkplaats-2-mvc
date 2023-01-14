@@ -7,10 +7,10 @@
 <h2>Dashboard-> auteurs</h2>
 
 <div>
-    <a href='/home' class='btn btn-primary'>Accounts</a>
-    <a href='/home/auteurs' class='btn btn-primary'>Auteurs</a>
+    <!-- <a href='/home' class='btn btn-primary'>Accounts</a> -->
+    <a href='/home' class='btn btn-primary'>Auteurs</a>
     <a href='/home/vragen' class='btn btn-primary'>Vragen</a>
-    <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a>
+    <!-- <a href='/home/leerdoelen' class='btn btn-primary'>Leerdoelen</a> -->
     <a href='/filtering' class='btn btn-primary'>Onderzoek</a>
 </div>
 
@@ -18,7 +18,7 @@
 
 {% block body %}
 
-<form method="POST" action="/home/auteurs">
+<form method="POST" action="/home">
     <label for="dob">Select date range:</label><br>
     <select id="dob" name="dob">
         <option value="show-all">All</option>
