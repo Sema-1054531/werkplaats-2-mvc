@@ -127,6 +127,11 @@ def questions():
     cursor = connection.cursor()
     # Initialize an empty list to store the query results
     rows = []
+
+    # Create a dictionary that maps the numbers to the corresponding words:
+    id_to_objective = {1: 'onthouden', 2: 'begrijpen', 3: 'toepassen', 4: 'analyseren', 5: 'evalueren', 6: 'creëren', 7: 'reproductie'}
+    id_to_author = {1: 'Samuel Jackson', 2: 'Bruce Willis', 3: 'Robert Niro', 4: 'Brad Pitt', 5: 'John Thomson', 6: 'Maikel Kastanje', 7: 'Brody Koops', 8: 'Henry Ford', 9: 'Kees Barst', 10: 'Caroline Hubert', 11: 'Tina Aaltje', 12: 'Aaron Paul', 13: 'Mena Mastrionie', 14: 'Mark Otting', 15: 'Alex Karlas', 16: 'Jeroen Bet', 17: 'Tim Splinter'}
+
     # Initialize a default value for the dropdown menu
     selected_option = 'all'
     # Check if the dropdown menu has been submitted
@@ -159,6 +164,17 @@ def questions():
             invalid_questions_status[row[0]] = False
     column = [column[0] for column in column.description]
     column.append('action')
+
+    for i, row in enumerate(rows):
+        number = row[1]
+        number2 = row[3]
+        word = id_to_objective.get(number)
+        author = id_to_author.get(number2)
+        rows[i] = row[:1] + (word,) + row[2:3] + (author,) + row[4:]
+
+
+
+        
     # Check if the download button has been clicked
     if request.args.get('download'):
         # Create a CSV file in memory
@@ -210,7 +226,7 @@ def find_learning_objectives():
 def find_authors():
     cursor = connection.cursor()
     cursor.execute('''SELECT * FROM auteurs''')
-    rows = cursor.fetchall()    
+    rows = cursor.fetchall()   
     return rows
 
 # edit vraag
