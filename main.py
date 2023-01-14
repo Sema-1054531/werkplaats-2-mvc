@@ -277,6 +277,7 @@ def add_user():
         return redirect(url_for("add_user"))
     return render_template("add_user.html")
 
+
 # edit user
 @app.route("/edit_user/<string:id>",methods=['POST','GET'])
 def edit_user(id):
