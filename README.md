@@ -9,9 +9,6 @@ Dit project is een webapplicatie die redacteurs helpt om de kwaliteit van hun te
 De applicatie maakt het makkelijk voor redacteurs om tekst te verbeteren. Het identificeert problemen in de vraagitems die vervolgens eenvoudig aangepast kunnen worden. Dit maakt het werk van de redacteuren sneller en makkelijker, zodat ze hun tijd efficiënter kunnen gebruiken. 🚀
 
 
-
----
-
 # 🛠️ Installatie en Setup
 
 Volg de onderstaande stappen om de applicatie lokaal te draaien:
@@ -45,6 +42,12 @@ Volg de onderstaande stappen om de applicatie lokaal te draaien:
    ```
    python main.py
    ```
+   
+## 🔐 Inloggen
+Om in te loggen, gebruik de volgende standaard gebruikersgegevens:
+
+- **Gebruikersnaam**: admin
+- **Wachtwoord**: admin
 
 ## 💻 Gebruikte Software
 - **Python** 🐍
@@ -52,8 +55,6 @@ Volg de onderstaande stappen om de applicatie lokaal te draaien:
 - **Bootstrap** 🎨
 - **HTML** 📝
 - **CSS** 🎨
-
----
 
 ## 👨‍💻 Credits
 **Gemaakt door**:  
